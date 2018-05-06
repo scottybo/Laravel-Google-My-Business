@@ -6,7 +6,7 @@ Please refer to https://developers.google.com/my-business/reference/rest/ for in
 
 ## Installation
 
-Run `composer require scottbo/laravel-google-my-business`
+Run `composer require scottybo/laravel-google-my-business`
 
 Or to install via composer - edit your composer.json to require the package.
 
