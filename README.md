@@ -1,5 +1,7 @@
 # Laravel Google My Business
 
+Note: To use the Google My Business API you have to apply for access: https://docs.google.com/forms/d/1XTQc-QEjsE7YrgstyJxbFDnwmhUhBFFvpNJBw3VzuuE/viewform
+
 This is a Laravel ready implementation of the Google My Business PHP Library (v4.1) as provided by Google on https://developers.google.com/my-business/samples/
 
 Please refer to https://developers.google.com/my-business/reference/rest/ for information on how the Google My Business API functions - more useful links are available at the bottom of this document.
@@ -33,6 +35,16 @@ Next add the following to the `aliases` array in your `config/app.php`
 ```php
 'GoogleMyBusiness' => Scottybo\LaravelGoogleMyBusiness\GoogleMyBusiness::class
 ```
+
+## Google My Business Discovery document
+
+The Google My Business API discovery document is a JSON document that describes the surface for a particular version of the API. You use the discovery document in conjunction with the Google API Discovery Service.
+
+`mybusiness_google_rest_v4p1.json` has been included with this project for your reference (downloaded from: https://developers.google.com/my-business/samples/)
+
+**Tips**
+ - For a guide on Google Discovery documents see: https://developers.google.com/discovery/v1/using#discovery-doc
+ - A useful tool for browsing this massive document is: http://jsonviewer.stack.hu/
 
 
 ## Code example
