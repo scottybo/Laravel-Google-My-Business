@@ -45,6 +45,7 @@ The Google My Business API discovery document is a JSON document that describes 
 **Tips**
  - For a guide on Google Discovery documents see: https://developers.google.com/discovery/v1/using#discovery-doc
  - A useful tool for browsing this massive document is: http://jsonviewer.stack.hu/
+ - Join the discussion! https://www.en.advertisercommunity.com/t5/Google-My-Business-API/bd-p/gmb-api
 
 
 ## Code example
@@ -94,6 +95,7 @@ class MyExampleClass
 
 Mostly for my reference as I develop this package, but you might find them useful too!
 
+ - https://www.en.advertisercommunity.com/t5/Google-My-Business-API/Create-Post-with-My-Business-API/td-p/1704175
  - https://developers.google.com/api-client-library/php/start/get_started
  - https://developers.google.com/identity/protocols/OAuth2WebServer
  - https://developers.google.com/identity/protocols/googlescopes
