@@ -835,7 +835,7 @@ class Google_Service_MyBusiness_Accounts_Resource extends Google_Service_Resourc
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('deleteNotifications', array($params), "Google_Service_MyBusiness_MybusinessEmpty");
+    return $this->call('deleteNotifications', array($params), Google_Service_MyBusiness_MybusinessEmpty::class);
   }
 
   /**
@@ -853,7 +853,7 @@ class Google_Service_MyBusiness_Accounts_Resource extends Google_Service_Resourc
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('generateAccountNumber', array($params), "Google_Service_MyBusiness_Account");
+    return $this->call('generateAccountNumber', array($params), Google_Service_MyBusiness_Account::class);
   }
 
   /**
@@ -868,7 +868,7 @@ class Google_Service_MyBusiness_Accounts_Resource extends Google_Service_Resourc
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MyBusiness_Account");
+    return $this->call('get', array($params), Google_Service_MyBusiness_Account::class);
   }
 
   /**
@@ -883,7 +883,7 @@ class Google_Service_MyBusiness_Accounts_Resource extends Google_Service_Resourc
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('getNotifications', array($params), "Google_Service_MyBusiness_Notifications");
+    return $this->call('getNotifications', array($params), Google_Service_MyBusiness_Notifications::class);
   }
 
   /**
@@ -915,7 +915,7 @@ class Google_Service_MyBusiness_Accounts_Resource extends Google_Service_Resourc
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MyBusiness_ListAccountsResponse");
+    return $this->call('list', array($params), Google_Service_MyBusiness_ListAccountsResponse::class);
   }
 
   /**
@@ -936,7 +936,7 @@ class Google_Service_MyBusiness_Accounts_Resource extends Google_Service_Resourc
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('update', array($params), "Google_Service_MyBusiness_Account");
+    return $this->call('update', array($params), Google_Service_MyBusiness_Account::class);
   }
 
   /**
@@ -959,7 +959,7 @@ class Google_Service_MyBusiness_Accounts_Resource extends Google_Service_Resourc
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('updateNotifications', array($params), "Google_Service_MyBusiness_Notifications");
+    return $this->call('updateNotifications', array($params), Google_Service_MyBusiness_Notifications::class);
   }
 }
 
@@ -990,7 +990,7 @@ class Google_Service_MyBusiness_AccountsAdmins_Resource extends Google_Service_R
   {
     $params = array('parent' => $parent, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_MyBusiness_Admin");
+    return $this->call('create', array($params), Google_Service_MyBusiness_Admin::class);
   }
 
   /**
@@ -1005,7 +1005,7 @@ class Google_Service_MyBusiness_AccountsAdmins_Resource extends Google_Service_R
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_MyBusiness_MybusinessEmpty");
+    return $this->call('delete', array($params), Google_Service_MyBusiness_MybusinessEmpty::class);
   }
 
   /**
@@ -1020,7 +1020,7 @@ class Google_Service_MyBusiness_AccountsAdmins_Resource extends Google_Service_R
   {
     $params = array('parent' => $parent);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MyBusiness_ListAccountAdminsResponse");
+    return $this->call('list', array($params), Google_Service_MyBusiness_ListAccountAdminsResponse::class);
   }
 
   /**
@@ -1036,7 +1036,7 @@ class Google_Service_MyBusiness_AccountsAdmins_Resource extends Google_Service_R
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_MyBusiness_Admin");
+    return $this->call('patch', array($params), Google_Service_MyBusiness_Admin::class);
   }
 }
 /**
@@ -1062,7 +1062,7 @@ class Google_Service_MyBusiness_AccountsInvitations_Resource extends Google_Serv
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('accept', array($params), "Google_Service_MyBusiness_MybusinessEmpty");
+    return $this->call('accept', array($params), Google_Service_MyBusiness_MybusinessEmpty::class);
   }
 
   /**
@@ -1078,7 +1078,7 @@ class Google_Service_MyBusiness_AccountsInvitations_Resource extends Google_Serv
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('decline', array($params), "Google_Service_MyBusiness_MybusinessEmpty");
+    return $this->call('decline', array($params), Google_Service_MyBusiness_MybusinessEmpty::class);
   }
 
   /**
@@ -1097,7 +1097,7 @@ class Google_Service_MyBusiness_AccountsInvitations_Resource extends Google_Serv
   {
     $params = array('parent' => $parent);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MyBusiness_ListInvitationsResponse");
+    return $this->call('list', array($params), Google_Service_MyBusiness_ListInvitationsResponse::class);
   }
 }
 /**
@@ -1126,7 +1126,7 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('associate', array($params), "Google_Service_MyBusiness_MybusinessEmpty");
+    return $this->call('associate', array($params), Google_Service_MyBusiness_MybusinessEmpty::class);
   }
 
   /**
@@ -1142,7 +1142,7 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('batchGet', array($params), "Google_Service_MyBusiness_BatchGetLocationsResponse");
+    return $this->call('batchGet', array($params), Google_Service_MyBusiness_BatchGetLocationsResponse::class);
   }
 
   /**
@@ -1158,7 +1158,7 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('clearAssociation', array($params), "Google_Service_MyBusiness_MybusinessEmpty");
+    return $this->call('clearAssociation', array($params), Google_Service_MyBusiness_MybusinessEmpty::class);
   }
 
   /**
@@ -1180,7 +1180,7 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
   {
     $params = array('parent' => $parent, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_MyBusiness_Location");
+    return $this->call('create', array($params), Google_Service_MyBusiness_Location::class);
   }
 
   /**
@@ -1200,7 +1200,7 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_MyBusiness_MybusinessEmpty");
+    return $this->call('delete', array($params), Google_Service_MyBusiness_MybusinessEmpty::class);
   }
 
   /**
@@ -1217,7 +1217,7 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('findMatches', array($params), "Google_Service_MyBusiness_FindMatchingLocationsResponse");
+    return $this->call('findMatches', array($params), Google_Service_MyBusiness_FindMatchingLocationsResponse::class);
   }
 
   /**
@@ -1232,7 +1232,7 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MyBusiness_Location");
+    return $this->call('get', array($params), Google_Service_MyBusiness_Location::class);
   }
 
   /**
@@ -1247,7 +1247,7 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('getGoogleUpdated', array($params), "Google_Service_MyBusiness_GoogleUpdatedLocation");
+    return $this->call('getGoogleUpdated', array($params), Google_Service_MyBusiness_GoogleUpdatedLocation::class);
   }
 
   /**
@@ -1276,7 +1276,7 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
   {
     $params = array('parent' => $parent);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MyBusiness_ListLocationsResponse");
+    return $this->call('list', array($params), Google_Service_MyBusiness_ListLocationsResponse::class);
   }
 
   /**
@@ -1306,7 +1306,7 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_MyBusiness_Location");
+    return $this->call('patch', array($params), Google_Service_MyBusiness_Location::class);
   }
 
   /**
@@ -1324,7 +1324,7 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('reportInsights', array($params), "Google_Service_MyBusiness_ReportLocationInsightsResponse");
+    return $this->call('reportInsights', array($params), Google_Service_MyBusiness_ReportLocationInsightsResponse::class);
   }
 
   /**
@@ -1343,7 +1343,7 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('transfer', array($params), "Google_Service_MyBusiness_Location");
+    return $this->call('transfer', array($params), Google_Service_MyBusiness_Location::class);
   }
 }
 
@@ -1374,7 +1374,7 @@ class Google_Service_MyBusiness_AccountsLocationsAdmins_Resource extends Google_
   {
     $params = array('parent' => $parent, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_MyBusiness_Admin");
+    return $this->call('create', array($params), Google_Service_MyBusiness_Admin::class);
   }
 
   /**
@@ -1390,7 +1390,7 @@ class Google_Service_MyBusiness_AccountsLocationsAdmins_Resource extends Google_
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_MyBusiness_MybusinessEmpty");
+    return $this->call('delete', array($params), Google_Service_MyBusiness_MybusinessEmpty::class);
   }
 
   /**
@@ -1405,7 +1405,7 @@ class Google_Service_MyBusiness_AccountsLocationsAdmins_Resource extends Google_
   {
     $params = array('parent' => $parent);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MyBusiness_ListLocationAdminsResponse");
+    return $this->call('list', array($params), Google_Service_MyBusiness_ListLocationAdminsResponse::class);
   }
 
   /**
@@ -1421,7 +1421,7 @@ class Google_Service_MyBusiness_AccountsLocationsAdmins_Resource extends Google_
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_MyBusiness_Admin");
+    return $this->call('patch', array($params), Google_Service_MyBusiness_Admin::class);
   }
 }
 /**
@@ -1449,7 +1449,7 @@ class Google_Service_MyBusiness_AccountsLocationsLocalPosts_Resource extends Goo
   {
     $params = array('parent' => $parent, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_MyBusiness_LocalPost");
+    return $this->call('create', array($params), Google_Service_MyBusiness_LocalPost::class);
   }
 
   /**
@@ -1464,7 +1464,7 @@ class Google_Service_MyBusiness_AccountsLocationsLocalPosts_Resource extends Goo
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_MyBusiness_MybusinessEmpty");
+    return $this->call('delete', array($params), Google_Service_MyBusiness_MybusinessEmpty::class);
   }
 
   /**
@@ -1479,7 +1479,7 @@ class Google_Service_MyBusiness_AccountsLocationsLocalPosts_Resource extends Goo
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MyBusiness_LocalPost");
+    return $this->call('get', array($params), Google_Service_MyBusiness_LocalPost::class);
   }
 
   /**
@@ -1500,7 +1500,7 @@ class Google_Service_MyBusiness_AccountsLocationsLocalPosts_Resource extends Goo
   {
     $params = array('parent' => $parent);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MyBusiness_ListLocalPostsResponse");
+    return $this->call('list', array($params), Google_Service_MyBusiness_ListLocalPostsResponse::class);
   }
 
   /**
@@ -1519,7 +1519,7 @@ class Google_Service_MyBusiness_AccountsLocationsLocalPosts_Resource extends Goo
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_MyBusiness_LocalPost");
+    return $this->call('patch', array($params), Google_Service_MyBusiness_LocalPost::class);
   }
 
   /**
@@ -1538,7 +1538,7 @@ class Google_Service_MyBusiness_AccountsLocationsLocalPosts_Resource extends Goo
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('reportInsights', array($params), "Google_Service_MyBusiness_ReportLocalPostInsightsResponse");
+    return $this->call('reportInsights', array($params), Google_Service_MyBusiness_ReportLocalPostInsightsResponse::class);
   }
 }
 /**
@@ -1565,7 +1565,7 @@ class Google_Service_MyBusiness_AccountsLocationsMedia_Resource extends Google_S
   {
     $params = array('parent' => $parent, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_MyBusiness_MediaItem");
+    return $this->call('create', array($params), Google_Service_MyBusiness_MediaItem::class);
   }
 
   /**
@@ -1579,7 +1579,7 @@ class Google_Service_MyBusiness_AccountsLocationsMedia_Resource extends Google_S
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('delete', array($params), "Google_Service_MyBusiness_MybusinessEmpty");
+    return $this->call('delete', array($params), Google_Service_MyBusiness_MybusinessEmpty::class);
   }
 
   /**
@@ -1593,7 +1593,7 @@ class Google_Service_MyBusiness_AccountsLocationsMedia_Resource extends Google_S
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MyBusiness_MediaItem");
+    return $this->call('get', array($params), Google_Service_MyBusiness_MediaItem::class);
   }
 
   /**
@@ -1616,7 +1616,7 @@ class Google_Service_MyBusiness_AccountsLocationsMedia_Resource extends Google_S
   {
     $params = array('parent' => $parent);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MyBusiness_ListMediaItemsResponse");
+    return $this->call('list', array($params), Google_Service_MyBusiness_ListMediaItemsResponse::class);
   }
 
   /**
@@ -1637,7 +1637,7 @@ class Google_Service_MyBusiness_AccountsLocationsMedia_Resource extends Google_S
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('patch', array($params), "Google_Service_MyBusiness_MediaItem");
+    return $this->call('patch', array($params), Google_Service_MyBusiness_MediaItem::class);
   }
 
   /**
@@ -1653,7 +1653,7 @@ class Google_Service_MyBusiness_AccountsLocationsMedia_Resource extends Google_S
   {
     $params = array('parent' => $parent, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('startUpload', array($params), "Google_Service_MyBusiness_MediaItemDataRef");
+    return $this->call('startUpload', array($params), Google_Service_MyBusiness_MediaItemDataRef::class);
   }
 }
 
@@ -1679,7 +1679,7 @@ class Google_Service_MyBusiness_AccountsLocationsMediaCustomers_Resource extends
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MyBusiness_MediaItem");
+    return $this->call('get', array($params), Google_Service_MyBusiness_MediaItem::class);
   }
 
   /**
@@ -1700,7 +1700,7 @@ class Google_Service_MyBusiness_AccountsLocationsMediaCustomers_Resource extends
   {
     $params = array('parent' => $parent);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MyBusiness_ListCustomerMediaItemsResponse");
+    return $this->call('list', array($params), Google_Service_MyBusiness_ListCustomerMediaItemsResponse::class);
   }
 }
 /**
@@ -1726,7 +1726,7 @@ class Google_Service_MyBusiness_AccountsLocationsReviews_Resource extends Google
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('deleteReply', array($params), "Google_Service_MyBusiness_MybusinessEmpty");
+    return $this->call('deleteReply', array($params), Google_Service_MyBusiness_MybusinessEmpty::class);
   }
 
   /**
@@ -1742,7 +1742,7 @@ class Google_Service_MyBusiness_AccountsLocationsReviews_Resource extends Google
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MyBusiness_Review");
+    return $this->call('get', array($params), Google_Service_MyBusiness_Review::class);
   }
 
   /**
@@ -1766,7 +1766,7 @@ class Google_Service_MyBusiness_AccountsLocationsReviews_Resource extends Google
   {
     $params = array('parent' => $parent);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MyBusiness_ListReviewsResponse");
+    return $this->call('list', array($params), Google_Service_MyBusiness_ListReviewsResponse::class);
   }
 
   /**
@@ -1783,7 +1783,7 @@ class Google_Service_MyBusiness_AccountsLocationsReviews_Resource extends Google
   {
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
-    return $this->call('updateReply', array($params), "Google_Service_MyBusiness_ReviewReply");
+    return $this->call('updateReply', array($params), Google_Service_MyBusiness_ReviewReply::class);
   }
 }
 
@@ -1825,7 +1825,7 @@ class Google_Service_MyBusiness_Attributes_Resource extends Google_Service_Resou
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MyBusiness_ListAttributeMetadataResponse");
+    return $this->call('list', array($params), Google_Service_MyBusiness_ListAttributeMetadataResponse::class);
   }
 }
 
@@ -1864,7 +1864,7 @@ class Google_Service_MyBusiness_Categories_Resource extends Google_Service_Resou
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MyBusiness_ListBusinessCategoriesResponse");
+    return $this->call('list', array($params), Google_Service_MyBusiness_ListBusinessCategoriesResponse::class);
   }
 }
 
