@@ -2,6 +2,7 @@
 
 namespace Scottybo\LaravelGoogleMyBusiness;
 
+use Google_Client;
 use Illuminate\Support\ServiceProvider;
 
 class GoogleMyBusinessServiceProvider extends ServiceProvider
@@ -22,7 +23,8 @@ class GoogleMyBusinessServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(GoogleMyBusiness::class, function () {
-            return new GoogleMyBusiness();
+            $client = new Google_Client(config('google'));
+            return new GoogleMyBusiness($client);
         });
         $this->app->alias(GoogleMyBusiness::class, 'laravel-google-my-business');
     }
