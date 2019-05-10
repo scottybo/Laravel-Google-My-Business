@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2014 Google Inc.
+ * Copyright 2010 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -47,6 +47,7 @@ class GoogleMyBusiness extends Google_Service
   public $accounts_invitations;
   public $accounts_locations;
   public $accounts_locations_admins;
+  public $accounts_locations_followers;
   public $accounts_locations_localPosts;
   public $accounts_locations_media;
   public $accounts_locations_media_customers;
@@ -79,7 +80,16 @@ class GoogleMyBusiness extends Google_Service
         'accounts',
         array(
           'methods' => array(
-            'deleteNotifications' => array(
+            'create' => array(
+              'path' => 'v4/accounts',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'primaryOwner' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
+            ),'deleteNotifications' => array(
               'path' => 'v4/{+name}',
               'httpMethod' => 'DELETE',
               'parameters' => array(
@@ -123,9 +133,9 @@ class GoogleMyBusiness extends Google_Service
               'path' => 'v4/accounts',
               'httpMethod' => 'GET',
               'parameters' => array(
-                'pageSize' => array(
+                'filter' => array(
                   'location' => 'query',
-                  'type' => 'integer',
+                  'type' => 'string',
                 ),
                 'pageToken' => array(
                   'location' => 'query',
@@ -135,9 +145,9 @@ class GoogleMyBusiness extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'filter' => array(
+                'pageSize' => array(
                   'location' => 'query',
-                  'type' => 'string',
+                  'type' => 'integer',
                 ),
               ),
             ),'listRecommendGoogleLocations' => array(
@@ -149,13 +159,13 @@ class GoogleMyBusiness extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageSize' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
                 ),
               ),
             ),'update' => array(
@@ -403,15 +413,7 @@ class GoogleMyBusiness extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageSize' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'filter' => array(
+                'orderBy' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -419,7 +421,15 @@ class GoogleMyBusiness extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'orderBy' => array(
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'filter' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -433,15 +443,15 @@ class GoogleMyBusiness extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'updateMask' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
                 'validateOnly' => array(
                   'location' => 'query',
                   'type' => 'boolean',
                 ),
                 'attributeMask' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'updateMask' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -530,6 +540,26 @@ class GoogleMyBusiness extends Google_Service
           )
         )
     );
+    $this->accounts_locations_followers = new Google_Service_MyBusiness_AccountsLocationsFollowers_Resource(
+        $this,
+        $this->serviceName,
+        'followers',
+        array(
+          'methods' => array(
+            'getMetadata' => array(
+              'path' => 'v4/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),
+          )
+        )
+    );
     $this->accounts_locations_localPosts = new Google_Service_MyBusiness_AccountsLocationsLocalPosts_Resource(
         $this,
         $this->serviceName,
@@ -575,13 +605,13 @@ class GoogleMyBusiness extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageSize' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
                 ),
               ),
             ),'patch' => array(
@@ -657,13 +687,13 @@ class GoogleMyBusiness extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageSize' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
                 ),
               ),
             ),'patch' => array(
@@ -719,13 +749,13 @@ class GoogleMyBusiness extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageSize' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
                 ),
               ),
             ),
@@ -767,9 +797,17 @@ class GoogleMyBusiness extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'orderBy' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
+                ),
+                'filter' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
                 'pageToken' => array(
                   'location' => 'query',
@@ -778,14 +816,6 @@ class GoogleMyBusiness extends Google_Service
                 'answersPerQuestion' => array(
                   'location' => 'query',
                   'type' => 'integer',
-                ),
-                'filter' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'orderBy' => array(
-                  'location' => 'query',
-                  'type' => 'string',
                 ),
               ),
             ),'patch' => array(
@@ -827,17 +857,17 @@ class GoogleMyBusiness extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageSize' => array(
+                'orderBy' => array(
                   'location' => 'query',
-                  'type' => 'integer',
+                  'type' => 'string',
                 ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'orderBy' => array(
+                'pageSize' => array(
                   'location' => 'query',
-                  'type' => 'string',
+                  'type' => 'integer',
                 ),
               ),
             ),'upsert' => array(
@@ -889,17 +919,17 @@ class GoogleMyBusiness extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageSize' => array(
+                'orderBy' => array(
                   'location' => 'query',
-                  'type' => 'integer',
+                  'type' => 'string',
                 ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'orderBy' => array(
+                'pageSize' => array(
                   'location' => 'query',
-                  'type' => 'string',
+                  'type' => 'integer',
                 ),
               ),
             ),'updateReply' => array(
@@ -941,13 +971,13 @@ class GoogleMyBusiness extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageSize' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
                 ),
               ),
             ),
@@ -964,19 +994,11 @@ class GoogleMyBusiness extends Google_Service
               'path' => 'v4/attributes',
               'httpMethod' => 'GET',
               'parameters' => array(
-                'name' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'categoryId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'country' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
                 'languageCode' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'name' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -984,7 +1006,15 @@ class GoogleMyBusiness extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
+                'country' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'categoryId' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -1003,15 +1033,15 @@ class GoogleMyBusiness extends Google_Service
               'path' => 'v4/categories',
               'httpMethod' => 'GET',
               'parameters' => array(
+                'searchTerm' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'regionCode' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'languageCode' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'searchTerm' => array(
+                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -1019,7 +1049,7 @@ class GoogleMyBusiness extends Google_Service
                   'location' => 'query',
                   'type' => 'integer',
                 ),
-                'pageToken' => array(
+                'languageCode' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -1048,13 +1078,13 @@ class GoogleMyBusiness extends Google_Service
               'path' => 'v4/chains:search',
               'httpMethod' => 'GET',
               'parameters' => array(
-                'chainDisplayName' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
                 'resultCount' => array(
                   'location' => 'query',
                   'type' => 'integer',
+                ),
+                'chainDisplayName' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
               ),
             ),
@@ -1099,6 +1129,30 @@ class GoogleMyBusiness extends Google_Service
  */
 class Google_Service_MyBusiness_Accounts_Resource extends Google_Service_Resource
 {
+
+  /**
+   * Creates an account with the specified name and type under the given parent.
+   *
+   *  Personal accounts and Organizations cannot be created.   User Groups cannot
+   * be created with a Personal account as primary owner.   Location Groups cannot
+   * be created with a primary owner of a Personal account if the Personal account
+   * is in an Organization.   Location Groups cannot own Location Groups.
+   * (accounts.create)
+   *
+   * @param Google_Account $postBody
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string primaryOwner The resource name of the account which will be
+   * the primary owner of the account being created. It should be of the form
+   * `accounts/{account_id}/`.
+   * @return Google_Service_MyBusiness_Account
+   */
+  public function create(Google_Service_MyBusiness_Account $postBody, $optParams = array())
+  {
+    $params = array('postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('create', array($params), "Google_Service_MyBusiness_Account");
+  }
 
   /**
    * Clears the pubsub notification settings for the account.
@@ -1171,15 +1225,6 @@ class Google_Service_MyBusiness_Accounts_Resource extends Google_Service_Resourc
    *
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int pageSize How many accounts to fetch per page. Default is 20,
-   * minimum is 2, and maximum page size is 20.
-   * @opt_param string pageToken If specified, the next page of accounts is
-   * retrieved. The `pageToken` is returned when a call to `accounts.list` returns
-   * more results than can fit into the requested page size.
-   * @opt_param string name The resource name of the account for which the list of
-   * directly accessible accounts is to be retrieved. This only makes sense for
-   * Organizations and User Groups. If empty, will return `ListAccounts` for the
-   * authenticated user.
    * @opt_param string filter A filter constraining the accounts to return. The
    * response includes only entries that match the filter. If `filter` is empty,
    * then no constraints are applied and all accounts (paginated) are retrieved
@@ -1187,6 +1232,15 @@ class Google_Service_MyBusiness_Accounts_Resource extends Google_Service_Resourc
    *
    * For example, a request with the filter `type=USER_GROUP` will only return
    * user groups.
+   * @opt_param string pageToken If specified, the next page of accounts is
+   * retrieved. The `pageToken` is returned when a call to `accounts.list` returns
+   * more results than can fit into the requested page size.
+   * @opt_param string name The resource name of the account for which the list of
+   * directly accessible accounts is to be retrieved. This only makes sense for
+   * Organizations and User Groups. If empty, will return `ListAccounts` for the
+   * authenticated user.
+   * @opt_param int pageSize How many accounts to fetch per page. Default is 20,
+   * minimum is 2, and maximum page size is 20.
    * @return Google_Service_MyBusiness_ListAccountsResponse
    */
   public function listAccounts($optParams = array())
@@ -1213,10 +1267,10 @@ class Google_Service_MyBusiness_Accounts_Resource extends Google_Service_Resourc
    * locations for.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int pageSize How many locations to fetch per page. Default is 25,
-   * minimum is 1, and maximum page size is 100.
    * @opt_param string pageToken If specified, the next page of locations is
    * retrieved.
+   * @opt_param int pageSize How many locations to fetch per page. Default is 25,
+   * minimum is 1, and maximum page size is 100.
    * @return Google_Service_MyBusiness_ListRecommendedGoogleLocationsResponse
    */
   public function listRecommendGoogleLocations($name, $optParams = array())
@@ -1603,11 +1657,17 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
    * from the Account, either directly or indirectly.
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string orderBy Sorting order for the request. Multiple fields
+   * should be comma-separated, following SQL syntax. The default sorting order is
+   * ascending. To specify descending order, a suffix " desc" should be added.
+   * Valid fields to order_by are location_name and store_code. For example:
+   * "location_name, store_code desc" or "location_name" or "store_code desc"
+   * @opt_param string languageCode The BCP 47 code of language to get display
+   * location properties in. If this language is not available, they will be
+   * provided in the language of the location. If neither is available, they will
+   * be provided in English.
    * @opt_param int pageSize How many locations to fetch per page. Default is 100,
    * minimum is 1, and maximum page size is 100.
-   * @opt_param string pageToken If specified, it fetches the next `page` of
-   * locations. The page token is returned by previous calls to `ListLocations`
-   * when there were more locations than could fit in the requested page size.
    * @opt_param string filter A filter constraining the locations to return. The
    * response includes only entries that match the filter. If `filter` is empty,
    * then constraints are applied and all locations (paginated) are retrieved for
@@ -1616,15 +1676,9 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
    * For more information about valid fields and example usage, see [Work with
    * Location Data Guide](https://developers.google.com/my-business/content
    * /location-data#filter_results_when_listing_locations).
-   * @opt_param string languageCode The BCP 47 code of language to get display
-   * location properties in. If this language is not available, they will be
-   * provided in the language of the location. If neither is available, they will
-   * be provided in English.
-   * @opt_param string orderBy Sorting order for the request. Multiple fields
-   * should be comma-separated, following SQL syntax. The default sorting order is
-   * ascending. To specify descending order, a suffix " desc" should be added.
-   * Valid fields to order_by are location_name and store_code. For example:
-   * "location_name, store_code desc" or "location_name" or "store_code desc"
+   * @opt_param string pageToken If specified, it fetches the next `page` of
+   * locations. The page token is returned by previous calls to `ListLocations`
+   * when there were more locations than could fit in the requested page size.
    * @return Google_Service_MyBusiness_ListLocationsResponse
    */
   public function listAccountsLocations($parent, $optParams = array())
@@ -1645,16 +1699,19 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
    * @param Google_Location $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string updateMask The specific fields to update. If no mask is
-   * specified, then this is treated as a full update and all fields are set to
-   * the values passed in, which may include unsetting empty fields in the
-   * request.
    * @opt_param bool validateOnly If true, the request is validated without
    * actually updating the location.
    * @opt_param string attributeMask The IDs of the attributes to update. Only
    * attributes noted in the mask will be updated. If an attribute is present in
    * the mask and not in the location, it will be removed. An empty mask will
    * update all attributes.
+   *
+   * Whenever this field is set, the update_mask should include attributes as one
+   * of the fields to update.
+   * @opt_param string updateMask The specific fields to update. If no mask is
+   * specified, then this is treated as a full update and all fields are set to
+   * the values passed in, which may include unsetting empty fields in the
+   * request.
    * @return Google_Service_MyBusiness_Location
    */
   public function patch($name, Google_Service_MyBusiness_Location $postBody, $optParams = array())
@@ -1795,6 +1852,36 @@ class Google_Service_MyBusiness_AccountsLocationsAdmins_Resource extends Google_
   }
 }
 /**
+ * The "followers" collection of methods.
+ * Typical usage is:
+ *  <code>
+ *   $mybusinessService = new Google_Service_MyBusiness(...);
+ *   $followers = $mybusinessService->followers;
+ *  </code>
+ */
+class Google_Service_MyBusiness_AccountsLocationsFollowers_Resource extends Google_Service_Resource
+{
+
+  /**
+   * Get the followers settings for a location.
+   *
+   * NOT_FOUND is returned if either the account or the location doesn't exist.
+   * PRECONDITION_FAILED is returned if the location is not verified nor connected
+   * to Maps. (followers.getMetadata)
+   *
+   * @param string $name The resource name of the location's followers metadata.
+   * accounts/{account_id}/locations/{location_id}/followers/metadata
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_MyBusiness_FollowersMetadata
+   */
+  public function getMetadata($name, $optParams = array())
+  {
+    $params = array('name' => $name);
+    $params = array_merge($params, $optParams);
+    return $this->call('getMetadata', array($params), Google_Service_MyBusiness_FollowersMetadata::class);
+  }
+}
+/**
  * The "localPosts" collection of methods.
  * Typical usage is:
  *  <code>
@@ -1860,10 +1947,10 @@ class Google_Service_MyBusiness_AccountsLocationsLocalPosts_Resource extends Goo
    * listed.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int pageSize How many local posts to return per page. Default of
-   * 20. The minimum is 1, and maximum page size is 100.
    * @opt_param string pageToken If specified, returns the next page of local
    * posts.
+   * @opt_param int pageSize How many local posts to return per page. Default of
+   * 20. The minimum is 1, and maximum page size is 100.
    * @return Google_Service_MyBusiness_ListLocalPostsResponse
    */
   public function listAccountsLocationsLocalPosts($parent, $optParams = array())
@@ -1974,12 +2061,12 @@ class Google_Service_MyBusiness_AccountsLocationsMedia_Resource extends Google_S
    * listed.
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string pageToken If specified, returns the next page of media
+   * items.
    * @opt_param int pageSize How many media items to return per page. The default
    * value is 100, which is also the maximum supported number of media items able
    * to be added to a location with the My Business API. Maximum page size is
    * 2500.
-   * @opt_param string pageToken If specified, returns the next page of media
-   * items.
    * @return Google_Service_MyBusiness_ListMediaItemsResponse
    */
   public function listAccountsLocationsMedia($parent, $optParams = array())
@@ -2060,10 +2147,10 @@ class Google_Service_MyBusiness_AccountsLocationsMediaCustomers_Resource extends
    * will be listed.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int pageSize How many media items to return per page. The default
-   * value is 100, the maximum supported page size is 200.
    * @opt_param string pageToken If specified, returns the next page of media
    * items.
+   * @opt_param int pageSize How many media items to return per page. The default
+   * value is 100, the maximum supported page size is 200.
    * @return Google_Service_MyBusiness_ListCustomerMediaItemsResponse
    */
   public function listAccountsLocationsMediaCustomers($parent, $optParams = array())
@@ -2120,18 +2207,18 @@ class Google_Service_MyBusiness_AccountsLocationsQuestions_Resource extends Goog
    * @param string $parent The name of the location to fetch questions for.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int pageSize How many questions to fetch per page. The default and
-   * maximum `page_size` values are 10.
-   * @opt_param string pageToken If specified, the next page of questions is
-   * retrieved.
-   * @opt_param int answersPerQuestion How many answers to fetch per question. The
-   * default and maximum `answers_per_question` values are 10.
-   * @opt_param string filter A filter constraining the questions to return. The
-   * only filter currently supported is "ignore_answered=true"
    * @opt_param string orderBy The order to return the questions. Valid options
    * include 'update_time desc' and 'upvote_count desc', which will return the
    * questions sorted descendingly by the requested field. The default sort order
    * is 'update_time desc'.
+   * @opt_param int pageSize How many questions to fetch per page. The default and
+   * maximum `page_size` values are 10.
+   * @opt_param string filter A filter constraining the questions to return. The
+   * only filter currently supported is "ignore_answered=true"
+   * @opt_param string pageToken If specified, the next page of questions is
+   * retrieved.
+   * @opt_param int answersPerQuestion How many answers to fetch per question. The
+   * default and maximum `answers_per_question` values are 10.
    * @return Google_Service_MyBusiness_ListQuestionsResponse
    */
   public function listAccountsLocationsQuestions($parent, $optParams = array())
@@ -2190,14 +2277,14 @@ class Google_Service_MyBusiness_AccountsLocationsQuestionsAnswers_Resource exten
    * @param string $parent The name of the question to fetch answers for.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int pageSize How many answers to fetch per page. The default and
-   * maximum `page_size` values are 10.
-   * @opt_param string pageToken If specified, the next page of answers is
-   * retrieved.
    * @opt_param string orderBy The order to return the answers. Valid options
    * include 'update_time desc' and 'upvote_count desc', which will return the
    * answers sorted descendingly by the requested field. The default sort order is
    * 'update_time desc'.
+   * @opt_param string pageToken If specified, the next page of answers is
+   * retrieved.
+   * @opt_param int pageSize How many answers to fetch per page. The default and
+   * maximum `page_size` values are 10.
    * @return Google_Service_MyBusiness_ListAnswersResponse
    */
   public function listAccountsLocationsQuestionsAnswers($parent, $optParams = array())
@@ -2274,13 +2361,14 @@ class Google_Service_MyBusiness_AccountsLocationsReviews_Resource extends Google
    * @param string $parent The name of the location to fetch reviews for.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int pageSize How many reviews to fetch per page. The maximum
-   * `page_size` is 200.
+   * @opt_param string orderBy Specifies the field to sort reviews by. If
+   * unspecified, the order of reviews returned will default to `update_time
+   * desc`. Valid orders to sort by are `rating`, `rating desc` and `update_time
+   * desc`.
    * @opt_param string pageToken If specified, it fetches the next page of
    * reviews.
-   * @opt_param string orderBy Specifies the field to sort reviews by. If
-   * unspecified, the order of reviews returned will default to `update_timedesc`.
-   * Valid orders to sort by are `rating`, `ratingdesc` and `update_timedesc`.
+   * @opt_param int pageSize How many reviews to fetch per page. The maximum
+   * `page_size` is 200.
    * @return Google_Service_MyBusiness_ListReviewsResponse
    */
   public function listAccountsLocationsReviews($parent, $optParams = array())
@@ -2344,10 +2432,10 @@ class Google_Service_MyBusiness_AccountsLocationsVerifications_Resource extends 
    * requests belong to.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param int pageSize How many verification to include per page. If not
-   * set, return all.
    * @opt_param string pageToken If specified, returns the next page of
    * verifications.
+   * @opt_param int pageSize How many verification to include per page. If not
+   * set, return all.
    * @return Google_Service_MyBusiness_ListVerificationsResponse
    */
   public function listAccountsLocationsVerifications($parent, $optParams = array())
@@ -2376,27 +2464,27 @@ class Google_Service_MyBusiness_Attributes_Resource extends Google_Service_Resou
    *
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string name Resource name of the location to look up available
-   * attributes.
-   * @opt_param string categoryId The primary category stable ID to find available
-   * attributes.
-   * @opt_param string country The ISO 3166-1 alpha-2 country code to find
-   * available attributes.
    * @opt_param string languageCode The BCP 47 code of language to get attribute
    * display names in. If this language is not available, they will be provided in
    * English.
+   * @opt_param string name Resource name of the location to look up available
+   * attributes.
    * @opt_param int pageSize How many attributes to include per page. Default is
    * 200, minimum is 1.
+   * @opt_param string country The ISO 3166-1 alpha-2 country code to find
+   * available attributes.
    * @opt_param string pageToken If specified, the next page of attribute metadata
    * is retrieved. The `pageToken` is returned when a call to `attributes.list`
    * returns more results than can fit into the requested page size.
+   * @opt_param string categoryId The primary category stable ID to find available
+   * attributes.
    * @return Google_Service_MyBusiness_ListAttributeMetadataResponse
    */
   public function listAttributes($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MyBusiness_ListAttributeMetadataResponse");
+    return $this->call('list', array($params), Google_Service_MyBusiness_ListAttributeMetadataResponse::class);
   }
 }
 
@@ -2421,21 +2509,21 @@ class Google_Service_MyBusiness_Categories_Resource extends Google_Service_Resou
    *
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string regionCode The ISO 3166-1 alpha-2 country code.
-   * @opt_param string languageCode The BCP 47 code of language. If the language
-   * is not available, it will default to English.
    * @opt_param string searchTerm Optional filter string from user.
-   * @opt_param int pageSize How many categories to fetch per page. Default is
-   * 100, minimum is 1, and maximum page size is 100.
+   * @opt_param string regionCode The ISO 3166-1 alpha-2 country code.
    * @opt_param string pageToken If specified, the next page of categories will be
    * fetched.
+   * @opt_param int pageSize How many categories to fetch per page. Default is
+   * 100, minimum is 1, and maximum page size is 100.
+   * @opt_param string languageCode The BCP 47 code of language. If the language
+   * is not available, it will default to English.
    * @return Google_Service_MyBusiness_ListBusinessCategoriesResponse
    */
   public function listCategories($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_MyBusiness_ListBusinessCategoriesResponse");
+    return $this->call('list', array($params), Google_Service_MyBusiness_ListBusinessCategoriesResponse::class);
   }
 }
 
@@ -2463,7 +2551,7 @@ class Google_Service_MyBusiness_Chains_Resource extends Google_Service_Resource
   {
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_MyBusiness_Chain");
+    return $this->call('get', array($params), Google_Service_MyBusiness_Chain::class);
   }
 
   /**
@@ -2471,18 +2559,18 @@ class Google_Service_MyBusiness_Chains_Resource extends Google_Service_Resource
    *
    * @param array $optParams Optional parameters.
    *
+   * @opt_param int resultCount The maximum number of matched chains to return
+   * from this query. The default is 10. The maximum possible value is 500.
    * @opt_param string chainDisplayName Search for a chain by its name.
    * Exact/partial/fuzzy/related queries are supported. Examples: "walmart", "wal-
    * mart", "walmmmart", "沃尔玛"
-   * @opt_param int resultCount The maximum number of matched chains to return
-   * from this query. The default is 10. The maximum possible value is 500.
    * @return Google_Service_MyBusiness_SearchChainsResponse
    */
   public function search($optParams = array())
   {
     $params = array();
     $params = array_merge($params, $optParams);
-    return $this->call('search', array($params), "Google_Service_MyBusiness_SearchChainsResponse");
+    return $this->call('search', array($params), Google_Service_MyBusiness_SearchChainsResponse::class);
   }
 }
 
@@ -3629,9 +3717,19 @@ class Google_Service_MyBusiness_FetchVerificationOptionsRequest extends Google_M
 {
   protected $internal_gapi_mappings = array(
   );
+  protected $contextType = 'Google_Service_MyBusiness_ServiceBusinessContext';
+  protected $contextDataType = '';
   public $languageCode;
 
 
+  public function setContext(Google_Service_MyBusiness_ServiceBusinessContext $context)
+  {
+    $this->context = $context;
+  }
+  public function getContext()
+  {
+    return $this->context;
+  }
   public function setLanguageCode($languageCode)
   {
     $this->languageCode = $languageCode;
@@ -3721,6 +3819,32 @@ class Google_Service_MyBusiness_FindMatchingLocationsResponse extends Google_Col
   public function getMatchedLocations()
   {
     return $this->matchedLocations;
+  }
+}
+
+class Google_Service_MyBusiness_FollowersMetadata extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $count;
+  public $name;
+
+
+  public function setCount($count)
+  {
+    $this->count = $count;
+  }
+  public function getCount()
+  {
+    return $this->count;
+  }
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+  public function getName()
+  {
+    return $this->name;
   }
 }
 
@@ -5086,6 +5210,7 @@ class Google_Service_MyBusiness_LocationState extends Google_Model
   );
   public $canDelete;
   public $canUpdate;
+  public $hasPendingEdits;
   public $hasPendingVerification;
   public $isDisabled;
   public $isDisconnected;
@@ -5114,6 +5239,14 @@ class Google_Service_MyBusiness_LocationState extends Google_Model
   public function getCanUpdate()
   {
     return $this->canUpdate;
+  }
+  public function setHasPendingEdits($hasPendingEdits)
+  {
+    $this->hasPendingEdits = $hasPendingEdits;
+  }
+  public function getHasPendingEdits()
+  {
+    return $this->hasPendingEdits;
   }
   public function setHasPendingVerification($hasPendingVerification)
   {
@@ -6562,6 +6695,24 @@ class Google_Service_MyBusiness_ServiceAreaBusiness extends Google_Model
   }
 }
 
+class Google_Service_MyBusiness_ServiceBusinessContext extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  protected $addressType = 'Google_Service_MyBusiness_PostalAddress';
+  protected $addressDataType = '';
+
+
+  public function setAddress(Google_Service_MyBusiness_PostalAddress $address)
+  {
+    $this->address = $address;
+  }
+  public function getAddress()
+  {
+    return $this->address;
+  }
+}
+
 class Google_Service_MyBusiness_SpecialHourPeriod extends Google_Model
 {
   protected $internal_gapi_mappings = array(
@@ -7042,6 +7193,8 @@ class Google_Service_MyBusiness_VerifyLocationRequest extends Google_Model
   );
   protected $addressInputType = 'Google_Service_MyBusiness_AddressInput';
   protected $addressInputDataType = '';
+  protected $contextType = 'Google_Service_MyBusiness_ServiceBusinessContext';
+  protected $contextDataType = '';
   protected $emailInputType = 'Google_Service_MyBusiness_EmailInput';
   protected $emailInputDataType = '';
   public $languageCode;
@@ -7057,6 +7210,14 @@ class Google_Service_MyBusiness_VerifyLocationRequest extends Google_Model
   public function getAddressInput()
   {
     return $this->addressInput;
+  }
+  public function setContext(Google_Service_MyBusiness_ServiceBusinessContext $context)
+  {
+    $this->context = $context;
+  }
+  public function getContext()
+  {
+    return $this->context;
   }
   public function setEmailInput(Google_Service_MyBusiness_EmailInput $emailInput)
   {
