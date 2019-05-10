@@ -6,6 +6,30 @@ This is a Laravel ready implementation of the Google My Business PHP Library (v4
 
 Please refer to https://developers.google.com/my-business/reference/rest/ for information on how the Google My Business API functions - more useful links are available at the bottom of this document.
 
+## Debugging
+
+I'm putting this above everything else as it's extremely important. The Google My Business Client library doesn't support detailed error responses:
+https://developers.google.com/my-business/content/support#detailed_error_responses
+
+So when something goes wrong, you get an extremely unhelpful 400 error message such as `Request contains an invalid argument`.
+
+To get more detailed error messages we need to add the HTTP header: `X-GOOG-API-FORMAT-VERSION: 2` to the request and the error message that gets returned will be a lot more useful.
+
+There isn't a pretty way to do this, but all you need to do is open:
+
+`/vendor/google/apiclient/src/Google/Http/REST.php`
+
+And in the `doExecute` function modify as follows
+
+```php
+      $httpHandler = HttpHandlerFactory::build($client);
+      
+      // Add the header to the request
+      $request = $request->withHeader('X-GOOG-API-FORMAT-VERSION', '2');
+```
+
+Once you've finished debugging, remove this added line.
+
 ## Installation
 
 Run `composer require scottybo/laravel-google-my-business`
@@ -45,7 +69,7 @@ The Google My Business API discovery document is a JSON document that describes 
 **Tips**
  - For a guide on Google Discovery documents see: https://developers.google.com/discovery/v1/using#discovery-doc
  - A useful tool for browsing this massive document is: http://jsonviewer.stack.hu/
- - Join the discussion! https://www.en.advertisercommunity.com/t5/Google-My-Business-API/bd-p/gmb-api
+ - Join the discussion! https://support.google.com/business/community?hl=en (old platform for discussion: https://www.en.advertisercommunity.com/t5/Google-My-Business-API/bd-p/gmb-api)
 
 
 ## Code example
@@ -95,6 +119,7 @@ class MyExampleClass
 
 Mostly for my reference as I develop this package, but you might find them useful too!
 
+ - NEW COMMUNITY URL: https://support.google.com/business/community?hl=en
  - https://www.en.advertisercommunity.com/t5/Google-My-Business-API/Create-Post-with-My-Business-API/td-p/1704175
  - https://developers.google.com/api-client-library/php/start/get_started
  - https://developers.google.com/identity/protocols/OAuth2WebServer
