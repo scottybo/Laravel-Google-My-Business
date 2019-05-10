@@ -2,7 +2,7 @@
 
 Note: To use the Google My Business API you have to apply for access: https://docs.google.com/forms/d/1XTQc-QEjsE7YrgstyJxbFDnwmhUhBFFvpNJBw3VzuuE/viewform
 
-This is a Laravel ready implementation of the Google My Business PHP Library (v4.1) as provided by Google on https://developers.google.com/my-business/samples/
+This is a Laravel ready implementation of the Google My Business PHP Library (v4.4) as provided by Google on https://developers.google.com/my-business/samples/
 
 Please refer to https://developers.google.com/my-business/reference/rest/ for information on how the Google My Business API functions - more useful links are available at the bottom of this document.
 
