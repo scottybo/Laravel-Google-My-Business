@@ -11,8 +11,8 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.0.0",
-        "illuminate/support": "4.*|5.*",
+        "php": ">=7.2",
+        "illuminate/support": "6.*",
         "google/apiclient": "^2.0"
     },
     "autoload": {
