@@ -394,6 +394,20 @@ class GoogleMyBusiness extends Google_Service
                   'required' => true,
                 ),
               ),
+            ),'getFoodMenus' => array(
+              'path' => 'v4/{+name}/foodMenus',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'readMask' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
             ),'getGoogleUpdated' => array(
               'path' => 'v4/{+name}:googleUpdated',
               'httpMethod' => 'GET',
@@ -1630,6 +1644,25 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
     return $this->call('get', array($params), Google_Service_MyBusiness_Location::class);
+  }
+
+  /**
+   * Returns the food menus of a specific location. Only call this 
+   * if location.location_state.can_have_food_menu is true.
+   * (locations.getFoodMenus)
+   *
+   * @param string $name Google identifier for this location.
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string readMask The specific fields to return. You must specify
+   * each field that is being returned in the mask.
+   * @return Google_Service_MyBusiness_FoodMenus
+   */
+  public function getFoodMenus($name, $optParams = array())
+  {
+    $params = array('name' => $name);
+    $params = array_merge($params, $optParams);
+    return $this->call('getFoodMenus', array($params), Google_Service_MyBusiness_FoodMenus::class);
   }
 
   /**
@@ -3819,6 +3852,496 @@ class Google_Service_MyBusiness_FindMatchingLocationsResponse extends Google_Col
   public function getMatchedLocations()
   {
     return $this->matchedLocations;
+  }
+}
+
+class Google_Service_MyBusiness_FoodMenus extends Google_Collection
+{
+  // protected $collection_key = 'menus';
+  protected $internal_gapi_mappings = array(
+  );
+  public $name;
+  protected $menusType = 'Google_Service_MyBusiness_FoodMenu';
+  protected $menusDataType = 'array';
+
+
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+  public function getName()
+  {
+    return $this->name;
+  }
+  public function setMenus($menus)
+  {
+    $this->menus = $menus;
+  }
+  public function getMenus()
+  {
+    return $this->menus;
+  }
+}
+
+class Google_Service_MyBusiness_FoodMenu extends Google_Collection
+{
+  // protected $collection_key = 'sections';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $labelsType = 'Google_Service_MyBusiness_MenuLabel';
+  protected $labelsDataType = 'array';
+  public $sourceUrl;
+  protected $sectionsType = 'Google_Service_MyBusiness_FoodMenuSection';
+  protected $sectionsDataType = 'array';
+  public $cuisines; // array of Enums
+
+
+  public function setLabels($labels)
+  {
+    $this->labels = $labels;
+  }
+  public function getLabels()
+  {
+    return $this->labels;
+  }
+  public function setSourceUrl($sourceUrl)
+  {
+    $this->sourceUrl = $sourceUrl;
+  }
+  public function getSourceUrl()
+  {
+    return $this->sourceUrl;
+  }
+  public function setSections($sections)
+  {
+    $this->sections = $sections;
+  }
+  public function getSections()
+  {
+    return $this->sections;
+  }
+  public function setCuisines($cuisines)
+  {
+    $this->cuisines = $cuisines;
+  }
+  public function getCuisines()
+  {
+    return $this->cuisines;
+  }
+}
+
+class Google_Service_MyBusiness_FoodMenuSection extends Google_Collection
+{
+  // protected $collection_key = 'labels';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $labelsType = 'Google_Service_MyBusiness_MenuLabel';
+  protected $labelsDataType = 'array';
+  protected $itemsType = 'Google_Service_MyBusiness_FoodMenuItem';
+  protected $itemsDataType = 'array';
+
+
+  public function setLabels($labels)
+  {
+    $this->labels = $labels;
+  }
+  public function getLabels()
+  {
+    return $this->labels;
+  }
+  public function setItems($items)
+  {
+    $this->items = $items;
+  }
+  public function getItems()
+  {
+    return $this->items;
+  }
+}
+
+class Google_Service_MyBusiness_FoodMenuItem extends Google_Collection
+{
+  // protected $collection_key = 'labels';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $labelsType = 'Google_Service_MyBusiness_MenuLabel';
+  protected $labelsDataType = 'array';
+  protected $attributesType = 'Google_Service_MyBusiness_FoodMenuItemAttributes';
+  protected $attributesDataType = '';
+  protected $optionsType = 'Google_Service_MyBusiness_FoodMenuItemOption';
+  protected $optionsDataType = 'array';
+
+
+  public function setLabels($labels)
+  {
+    $this->labels = $labels;
+  }
+  public function getLabels()
+  {
+    return $this->labels;
+  }
+  public function setAttributes($attributes)
+  {
+    $this->attributes = $attributes;
+  }
+  public function getAttributes()
+  {
+    return $this->attributes;
+  }
+  public function setOptions($options)
+  {
+    $this->options = $options;
+  }
+  public function getOptions()
+  {
+    return $this->options;
+  }
+}
+
+class Google_Service_MyBusiness_FoodMenuItemOption extends Google_Collection
+{
+  // protected $collection_key = 'labels';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $labelsType = 'Google_Service_MyBusiness_MenuLabel';
+  protected $labelsDataType = 'array';
+  protected $attributesType = 'Google_Service_MyBusiness_FoodMenuItemAttributes';
+  protected $attributesDataType = '';
+
+
+  public function setLabels($labels)
+  {
+    $this->labels = $labels;
+  }
+  public function getLabels()
+  {
+    return $this->labels;
+  }
+  public function setAttributes($attributes)
+  {
+    $this->attributes = $attributes;
+  }
+  public function getAttributes()
+  {
+    return $this->attributes;
+  }
+}
+
+class Google_Service_MyBusiness_FoodMenuItemAttributes extends Google_Collection
+{
+  // protected $collection_key = 'price';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $priceType = 'Google_Service_MyBusiness_Money';
+  protected $priceDataType = '';
+  public $spiciness;
+  public $allergen; // array of Enums
+  public $dietaryRestriction; // array of Enums
+  protected $nutritionFactsType = 'Google_Service_MyBusiness_NutritionFacts';
+  protected $nutritionFactsDataType = '';
+  protected $ingredientsType = 'Google_Service_MyBusiness_Ingredient';
+  protected $ingredientsDataType = 'array';
+  public $servesNumPeople;
+  public $preparationMethods; // array of Enums
+  protected $portionSizeType = 'Google_Service_MyBusiness_PortionSize';
+  protected $portionSizeDataType = '';
+  public $mediaKeys; // array of String
+
+
+  public function setPrice(Google_Service_MyBusiness_Money $price)
+  {
+    $this->price = $price;
+  }
+  public function getPrice()
+  {
+    return $this->price;
+  }
+  public function setSpiciness($spiciness)
+  {
+    $this->spiciness = $spiciness;
+  }
+  public function getSpiciness()
+  {
+    return $this->spiciness;
+  }
+  public function setAllergen($allergen)
+  {
+    $this->allergen = $allergen;
+  }
+  public function getAllergen()
+  {
+    return $this->allergen;
+  }
+  public function setDietaryRestriction($dietaryRestriction)
+  {
+    $this->dietaryRestriction = $dietaryRestriction;
+  }
+  public function getDietaryRestriction()
+  {
+    return $this->dietaryRestriction;
+  }
+  public function setNutritionFacts($nutritionFacts)
+  {
+    $this->nutritionFacts = $nutritionFacts;
+  }
+  public function getNutritionFacts()
+  {
+    return $this->nutritionFacts;
+  }
+  public function setIngredients($ingredients)
+  {
+    $this->ingredients = $ingredients;
+  }
+  public function getIngredients()
+  {
+    return $this->ingredients;
+  }
+  public function setPreparationMethods($preparationMethods)
+  {
+    $this->preparationMethods = $preparationMethods;
+  }
+  public function getPreparationMethods()
+  {
+    return $this->preparationMethods;
+  }
+  public function setPortionSize($portionSize)
+  {
+    $this->portionSize = $portionSize;
+  }
+  public function getPortionSize()
+  {
+    return $this->portionSize;
+  }
+  public function setMediaKeys($mediaKeys)
+  {
+    $this->mediaKeys = $mediaKeys;
+  }
+  public function getMediaKeys()
+  {
+    return $this->mediaKeys;
+  }
+}
+
+class Google_Service_MyBusiness_PortionSize extends Google_Collection
+{
+  // protected $collection_key = 'labels';
+  protected $internal_gapi_mappings = array(
+  );
+  public $quantity;
+  protected $unitType = 'Google_Service_MyBusiness_MenuLabel';
+  protected $unitDataType = 'array';
+
+
+  public function setQuantity($quantity)
+  {
+    $this->quantity = $quantity;
+  }
+  public function getQuantity()
+  {
+    return $this->quantity;
+  }
+  public function setUnit($unit)
+  {
+    $this->unit = $unit;
+  }
+  public function getUnit()
+  {
+    return $this->unit;
+  }
+}
+
+class Google_Service_MyBusiness_Ingredient extends Google_Collection
+{
+  // protected $collection_key = 'labels';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $labelsType = 'Google_Service_MyBusiness_MenuLabel';
+  protected $labelsDataType = 'array';
+
+
+  public function setLabels($labels)
+  {
+    $this->labels = $labels;
+  }
+  public function getLabels()
+  {
+    return $this->labels;
+  }
+}
+
+class Google_Service_MyBusiness_MenuLabel extends Google_Collection
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $displayName;
+  public $description;
+  public $languageCode;
+
+
+  public function setDisplayName($displayName)
+  {
+    $this->displayName = $displayName;
+  }
+  public function getDisplayName()
+  {
+    return $this->displayName;
+  }
+  public function setDescription($description)
+  {
+    $this->description = $description;
+  }
+  public function getDescription()
+  {
+    return $this->description;
+  }
+  public function setLanguageCode($languageCode)
+  {
+    $this->languageCode = $languageCode;
+  }
+  public function getLanguageCode()
+  {
+    return $this->languageCode;
+  }
+}
+
+class Google_Service_MyBusiness_NutritionFacts extends Google_Collection
+{
+  // protected $collection_key = 'calories';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $caloriesType = 'Google_Service_MyBusiness_CaloriesFact';
+  protected $caloriesDataType = '';
+  protected $totalFatType = 'Google_Service_MyBusiness_NutritionFact';
+  protected $totalFatDataType = '';
+  protected $cholesterolFatType = 'Google_Service_MyBusiness_NutritionFact';
+  protected $cholesterolFatDataType = '';
+  protected $sodiumType = 'Google_Service_MyBusiness_NutritionFact';
+  protected $sodiumDataType = '';
+  protected $totalCarbohydrateType = 'Google_Service_MyBusiness_NutritionFact';
+  protected $totalCarbohydrateDataType = '';
+  protected $proteinType = 'Google_Service_MyBusiness_NutritionFact';
+  protected $proteinDataType = '';
+
+
+  public function setCalories($calories)
+  {
+    $this->calories = $calories;
+  }
+  public function getCalories()
+  {
+    return $this->calories;
+  }
+  public function setTotalFat($totalFat)
+  {
+    $this->totalFat = $totalFat;
+  }
+  public function getTotalFat()
+  {
+    return $this->totalFat;
+  }
+  public function setCholesterol($cholesterol)
+  {
+    $this->cholesterol = $cholesterol;
+  }
+  public function getCholesterol()
+  {
+    return $this->cholesterol;
+  }
+  public function setSodium($sodium)
+  {
+    $this->sodium = $sodium;
+  }
+  public function getSodium()
+  {
+    return $this->sodium;
+  }
+  public function setTotalCarbohydrate($totalCarbohydrate)
+  {
+    $this->totalCarbohydrate = $totalCarbohydrate;
+  }
+  public function getTotalCarbohydrate()
+  {
+    return $this->totalCarbohydrate;
+  }
+  public function setProtein($protein)
+  {
+    $this->protein = $protein;
+  }
+  public function getProtein()
+  {
+    return $this->protein;
+  }
+}
+
+class Google_Service_MyBusiness_CaloriesFact extends Google_Collection
+{
+  // protected $collection_key = 'lowerAmount';
+  protected $internal_gapi_mappings = array(
+  );
+  public $lowerAmount;
+  public $upperAmount;
+  public $unit;
+
+
+  public function setLowerAmount($lowerAmount)
+  {
+    $this->lowerAmount = $lowerAmount;
+  }
+  public function getLowerAmount()
+  {
+    return $this->lowerAmount;
+  }
+  public function setUpperAmount($upperAmount)
+  {
+    $this->upperAmount = $upperAmount;
+  }
+  public function getUpperAmount()
+  {
+    return $this->upperAmount;
+  }
+  public function setUnit($unit)
+  {
+    $this->unit = $unit;
+  }
+  public function getUnit()
+  {
+    return $this->unit;
+  }
+}
+
+class Google_Service_MyBusiness_NutritionFact extends Google_Collection
+{
+  // protected $collection_key = 'lowerAmount';
+  protected $internal_gapi_mappings = array(
+  );
+  public $lowerAmount;
+  public $upperAmount;
+  public $unit;
+
+
+  public function setLowerAmount($lowerAmount)
+  {
+    $this->lowerAmount = $lowerAmount;
+  }
+  public function getLowerAmount()
+  {
+    return $this->lowerAmount;
+  }
+  public function setUpperAmount($upperAmount)
+  {
+    $this->upperAmount = $upperAmount;
+  }
+  public function getUpperAmount()
+  {
+    return $this->upperAmount;
+  }
+  public function setUnit($unit)
+  {
+    $this->unit = $unit;
+  }
+  public function getUnit()
+  {
+    return $this->unit;
   }
 }
 
