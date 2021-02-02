@@ -64,7 +64,7 @@ Next add the following to the `aliases` array in your `config/app.php`
 
 The Google My Business API discovery document is a JSON document that describes the surface for a particular version of the API. You use the discovery document in conjunction with the Google API Discovery Service.
 
-`mybusiness_google_rest_v4p4.json` has been included with this project for your reference (downloaded from: https://developers.google.com/my-business/samples/)
+`mybusiness_google_rest_v4p8.json` has been included with this project for your reference (downloaded from: https://developers.google.com/my-business/samples/)
 
 **Tips**
  - For a guide on Google Discovery documents see: https://developers.google.com/discovery/v1/using#discovery-doc
