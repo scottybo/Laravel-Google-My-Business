@@ -418,6 +418,16 @@ class GoogleMyBusiness extends Google_Service
                   'required' => true,
                 ),
               ),
+            ),'getServiceList' => array(
+              'path' => 'v4/{+name}/serviceList',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
             ),'list' => array(
               'path' => 'v4/{+parent}/locations',
               'httpMethod' => 'GET',
@@ -1678,6 +1688,22 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
     $params = array('name' => $name);
     $params = array_merge($params, $optParams);
     return $this->call('getGoogleUpdated', array($params), Google_Service_MyBusiness_GoogleUpdatedLocation::class);
+  }
+
+  /**
+   * Get the specified service list of a location.
+   * (locations.getServiceList)
+   *
+   * @param string $name Google identifier for this location.
+   * @param array $optParams Optional parameters.
+   *
+   * @return Google_Service_MyBusiness_ServiceList
+   */
+  public function getServiceList($name, $optParams = array())
+  {
+    $params = array('name' => $name);
+    $params = array_merge($params, $optParams);
+    return $this->call('getServiceList', array($params), Google_Service_MyBusiness_ServiceList::class);
   }
 
   /**
@@ -4342,6 +4368,136 @@ class Google_Service_MyBusiness_NutritionFact extends Google_Collection
   public function getUnit()
   {
     return $this->unit;
+  }
+}
+
+class Google_Service_MyBusiness_ServiceList extends Google_Collection
+{
+  // protected $collection_key = 'serviceItem';
+  protected $internal_gapi_mappings = array(
+  );
+  public $name;
+  protected $serviceItemsType = 'Google_Service_MyBusiness_ServiceItem';
+  protected $serviceItemsDataType = 'array';
+
+
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+  public function getName()
+  {
+    return $this->name;
+  }
+  public function setServiceItems($serviceItems)
+  {
+    $this->serviceItems = $serviceItems;
+  }
+  public function getServiceItems()
+  {
+    return $this->serviceItems;
+  }
+}
+
+class Google_Service_MyBusiness_ServiceItem extends Google_Collection
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $isOffered;
+  protected $structuredServiceItemType = 'Google_Service_MyBusiness_StructuredServiceItem';
+  protected $structuredServiceItemDataType = '';
+  protected $freeFormServiceItemType = 'Google_Service_MyBusiness_FreeFormServiceItem';
+  protected $freeFormServiceItemDataType = '';
+  protected $priceType = 'Google_Service_MyBusiness_Money';
+  protected $priceDataType = '';
+
+
+  public function setIsOffered($isOffered)
+  {
+    $this->isOffered = $isOffered;
+  }
+  public function getIsOffered()
+  {
+    return $this->isOffered;
+  }
+  public function setStructuredServiceItem($structuredServiceItem)
+  {
+    $this->structuredServiceItem = $structuredServiceItem;
+  }
+  public function getStructuredServiceItem()
+  {
+    return $this->structuredServiceItem;
+  }
+  public function setFreeFormServiceItem($freeFormServiceItem)
+  {
+    $this->freeFormServiceItem = $freeFormServiceItem;
+  }
+  public function getFreeFormServiceItem()
+  {
+    return $this->freeFormServiceItem;
+  }
+  public function setPrice(Google_Service_MyBusiness_Money $price)
+  {
+    $this->price = $price;
+  }
+  public function getPrice()
+  {
+    return $this->price;
+  }
+}
+
+class Google_Service_MyBusiness_StructuredServiceItem extends Google_Collection
+{
+  // protected $collection_key = 'serviceTypeId';
+  protected $internal_gapi_mappings = array(
+  );
+  public $serviceTypeId;
+  public $description;
+
+
+  public function setServiceTypeId($serviceTypeId)
+  {
+    $this->serviceTypeId = $serviceTypeId;
+  }
+  public function getServiceTypeId()
+  {
+    return $this->serviceTypeId;
+  }
+  public function setDescription($description)
+  {
+    $this->description = $description;
+  }
+  public function getDescription()
+  {
+    return $this->description;
+  }
+}
+
+class Google_Service_MyBusiness_FreeFormServiceItem extends Google_Collection
+{
+  // protected $collection_key = 'serviceTypeId';
+  protected $internal_gapi_mappings = array(
+  );
+  public $categoryId;
+  protected $labelType = 'Google_Service_MyBusiness_Label';
+  protected $labelDataType = '';
+
+
+  public function setCategoryId($categoryId)
+  {
+    $this->categoryId = $categoryId;
+  }
+  public function getCategoryId()
+  {
+    return $this->categoryId;
+  }
+  public function setLabel($label)
+  {
+    $this->label = $label;
+  }
+  public function getLabel()
+  {
+    return $this->label;
   }
 }
 
