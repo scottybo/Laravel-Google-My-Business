@@ -43,6 +43,7 @@ class GoogleMyBusiness extends Google_Service
 
 
   public $accounts;
+  public $accounts_list;
   public $accounts_admins;
   public $accounts_invitations;
   public $accounts_locations;
@@ -73,6 +74,12 @@ class GoogleMyBusiness extends Google_Service
     $this->servicePath = '';
     $this->version = 'v4';
     $this->serviceName = 'mybusiness';
+
+    $v1Update = $this;
+    $v1Update->rootUrl = 'https://mybusinessaccountmanagement.googleapis.com/';
+    $v1Update->servicePath = '';
+    $v1Update->version = 'v1';
+    $v1Update->serviceName = 'mybusinessaccountmanagement';
 
     $this->accounts = new Google_Service_MyBusiness_Accounts_Resource(
         $this,
@@ -196,6 +203,37 @@ class GoogleMyBusiness extends Google_Service
           )
         )
     );
+      $this->accounts_list = new Google_Service_Account_Management_Accounts(
+          $v1Update,
+          $v1Update->serviceName,
+          'accounts',
+          array(
+              'methods' => array(
+                  'list' => array(
+                      'path' => 'v1/accounts',
+                      'httpMethod' => 'GET',
+                      'parameters' => array(
+                          'parentAccount' => array(
+                              'location' => 'query',
+                              'type' => 'string',
+                          ),
+                          'pageSize' => array(
+                              'location' => 'query',
+                              'type' => 'integer',
+                          ),
+                          'pageToken' => array(
+                              'location' => 'query',
+                              'type' => 'string',
+                          ),
+                          'filter' => array(
+                              'location' => 'query',
+                              'type' => 'string',
+                          ),
+                      ),
+                  )
+              )
+          )
+      );
     $this->accounts_admins = new Google_Service_MyBusiness_AccountsAdmins_Resource(
         $this,
         $this->serviceName,
@@ -1347,6 +1385,50 @@ class Google_Service_MyBusiness_Accounts_Resource extends Google_Service_Resourc
     $params = array_merge($params, $optParams);
     return $this->call('updateNotifications', array($params), Google_Service_MyBusiness_Notifications::class);
   }
+}
+
+/**
+ * The "accounts" collection of methods.
+ * Typical usage is:
+ *  <code>
+ *   $mybusinessService = new Google_Service_MyBusiness(...);
+ *   $accounts = $mybusinessService->accounts;
+ *  </code>
+ */
+class Google_Service_Account_Management_Accounts extends Google_Service_Resource
+{
+
+    /**
+     * Lists all of the accounts for the authenticated user. This includes all
+     * accounts that the user owns, as well as any accounts for which the user has
+     * management rights. (accounts.listAccounts)
+     *
+     * @param array $optParams Optional parameters.
+     *
+     * @opt_param string filter A filter constraining the accounts to return. The
+     * response includes only entries that match the filter. If `filter` is empty,
+     * then no constraints are applied and all accounts (paginated) are retrieved
+     * for the requested account.
+     *
+     * For example, a request with the filter `type=USER_GROUP` will only return
+     * user groups.
+     * @opt_param string pageToken If specified, the next page of accounts is
+     * retrieved. The `pageToken` is returned when a call to `accounts.list` returns
+     * more results than can fit into the requested page size.
+     * @opt_param string name The resource name of the account for which the list of
+     * directly accessible accounts is to be retrieved. This only makes sense for
+     * Organizations and User Groups. If empty, will return `ListAccounts` for the
+     * authenticated user.
+     * @opt_param int pageSize How many accounts to fetch per page. Default is 20,
+     * minimum is 2, and maximum page size is 20.
+     * @return Google_Service_MyBusiness_ListAccountsResponse
+     */
+    public function listAccounts($optParams = array())
+    {
+        $params = array();
+        $params = array_merge($params, $optParams);
+        return $this->call('list', array($params), Google_Service_MyBusiness_ListAccountsResponse::class);
+    }
 }
 
 /**
