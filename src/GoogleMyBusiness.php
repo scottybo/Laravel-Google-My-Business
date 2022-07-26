@@ -149,10 +149,6 @@ class GoogleMyBusiness extends Google_Service
                                 'type' => 'string',
                                 'required' => true,
                             ),
-                            'readMask' => array(
-                                'location' => 'query',
-                                'type' => 'string',
-                            ),
                         ),
                     ),'getGoogleUpdated' => array(
                         'path' => 'v1/{+name}:googleUpdated',
@@ -1918,6 +1914,11 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
         return $this->call('get', array($params), Google_Service_MyBusiness_Location::class);
     }
 
+    public function getAttributes($name)
+    {
+        $params = array('name' => strstr($name, 'locations/'));
+        return $this->call('getAttributes', array($params), Google_Service_MyBusiness_Location_Attributes::class);
+    }
     /**
      * Returns the food menus of a specific location. Only call this
      * if location.location_state.can_have_food_menu is true.
@@ -3243,22 +3244,22 @@ class Google_Service_MyBusiness_Attribute extends Google_Collection
     protected $collection_key = 'values';
     protected $internal_gapi_mappings = array(
     );
-    public $attributeId;
+    public $name;
     protected $repeatedEnumValueType = 'Google_Service_MyBusiness_RepeatedEnumAttributeValue';
     protected $repeatedEnumValueDataType = '';
-    protected $urlValuesType = 'Google_Service_MyBusiness_UrlAttributeValue';
-    protected $urlValuesDataType = 'array';
+    protected $uriValuesType = 'Google_Service_MyBusiness_UrlAttributeValue';
+    protected $uriValuesDataType = 'array';
     public $valueType;
     public $values;
 
 
-    public function setAttributeId($attributeId)
+    public function setName($name)
     {
-        $this->attributeId = $attributeId;
+        $this->name = $name;
     }
     public function getAttributeId()
     {
-        return $this->attributeId;
+        return $this->name;
     }
     public function setRepeatedEnumValue(Google_Service_MyBusiness_RepeatedEnumAttributeValue $repeatedEnumValue)
     {
@@ -3268,13 +3269,13 @@ class Google_Service_MyBusiness_Attribute extends Google_Collection
     {
         return $this->repeatedEnumValue;
     }
-    public function setUrlValues($urlValues)
+    public function setUriValues($urlValues)
     {
-        $this->urlValues = $urlValues;
+        $this->uriValues = $urlValues;
     }
-    public function getUrlValues()
+    public function getUriValues()
     {
-        return $this->urlValues;
+        return $this->uriValues;
     }
     public function setValueType($valueType)
     {
@@ -5087,7 +5088,7 @@ class Google_Service_MyBusiness_ListAnswersResponse extends Google_Collection
 
 class Google_Service_MyBusiness_ListAttributeMetadataResponse extends Google_Collection
 {
-    protected $collection_key = 'attributes';
+    protected $collection_key = 'attributeMetadata';
     protected $internal_gapi_mappings = array(
     );
     protected $attributesType = 'Google_Service_MyBusiness_AttributeMetadata';
@@ -5101,7 +5102,7 @@ class Google_Service_MyBusiness_ListAttributeMetadataResponse extends Google_Col
     }
     public function getAttributes()
     {
-        return $this->attributes;
+        return $this->attributeMetadata;
     }
     public function setNextPageToken($nextPageToken)
     {
@@ -5733,6 +5734,33 @@ class Google_Service_MyBusiness_LocalPostProduct extends Google_Model
     }
 }
 
+class Google_Service_MyBusiness_Location_Attributes extends Google_Collection
+{
+    protected $collection_key = 'attributes';
+    public $name;
+    public $attributes;
+
+    protected $attributesType = 'Google_Service_MyBusiness_Attribute';
+    protected $attributesDataType = 'array';
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function setAttributes($attributes)
+    {
+        $this->attributes = $attributes;
+    }
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+}
+
 class Google_Service_MyBusiness_Location extends Google_Collection
 {
     protected $collection_key = 'priceLists';
@@ -5745,14 +5773,10 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     public $additionalPhones;
     protected $addressType = 'Google_Service_MyBusiness_PostalAddress';
     protected $addressDataType = '';
-    protected $attributesType = 'Google_Service_MyBusiness_Attribute';
-    protected $attributesDataType = 'array';
     public $labels;
     public $languageCode;
     protected $latlngType = 'Google_Service_MyBusiness_LatLng';
     protected $latlngDataType = '';
-    protected $locationKeyType = 'Google_Service_MyBusiness_LocationKey';
-    protected $locationKeyDataType = '';
     public $locationName;
     protected $locationStateType = 'Google_Service_MyBusiness_LocationState';
     protected $locationStateDataType = '';
@@ -5794,7 +5818,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getAdditionalCategories()
     {
-        return $this->additionalCategories;
+        return array_key_exists('additionalCategories', $this->categories) ? $this->categories['additionalCategories'] : null;
     }
     public function setAdditionalPhones($additionalPhones)
     {
@@ -5802,7 +5826,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getAdditionalPhones()
     {
-        return $this->additionalPhones;
+        return array_key_exists('additionalPhones', $this->phoneNumbers) ? $this->phoneNumbers['additionalPhones'] : null;
     }
     public function setAddress(Google_Service_MyBusiness_PostalAddress $address)
     {
@@ -5810,15 +5834,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getAddress()
     {
-        return $this->address;
-    }
-    public function setAttributes($attributes)
-    {
-        $this->attributes = $attributes;
-    }
-    public function getAttributes()
-    {
-        return $this->attributes;
+        return $this->storefrontAddress;
     }
     public function setLabels($labels)
     {
@@ -5844,21 +5860,13 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     {
         return $this->latlng;
     }
-    public function setLocationKey(Google_Service_MyBusiness_LocationKey $locationKey)
-    {
-        $this->locationKey = $locationKey;
-    }
-    public function getLocationKey()
-    {
-        return $this->locationKey;
-    }
     public function setLocationName($locationName)
     {
         $this->locationName = $locationName;
     }
     public function getLocationName()
     {
-        return $this->locationName;
+        return $this->title;
     }
     public function setLocationState(Google_Service_MyBusiness_LocationState $locationState)
     {
@@ -5866,7 +5874,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getLocationState()
     {
-        return $this->locationState;
+        return $this->metadata;
     }
     public function setMetadata(Google_Service_MyBusiness_Metadata $metadata)
     {
@@ -5906,7 +5914,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getPrimaryCategory()
     {
-        return $this->primaryCategory;
+        return array_key_exists('primaryCategory', $this->categories) ? $this->categories['primaryCategory'] : null;
     }
     public function setPrimaryPhone($primaryPhone)
     {
@@ -5914,7 +5922,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getPrimaryPhone()
     {
-        return $this->primaryPhone;
+        return array_key_exists('primaryPhone', $this->phoneNumbers) ? $this->phoneNumbers['primaryPhone'] : null;
     }
     public function setProfile(Google_Service_MyBusiness_Profile $profile)
     {
@@ -5970,7 +5978,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getWebsiteUrl()
     {
-        return $this->websiteUrl;
+        return $this->websiteUri;
     }
 }
 
