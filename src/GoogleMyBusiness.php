@@ -5773,23 +5773,24 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     public $additionalPhones;
     protected $addressType = 'Google_Service_MyBusiness_PostalAddress';
     protected $addressDataType = '';
+    public $categories;
     public $labels;
     public $languageCode;
     protected $latlngType = 'Google_Service_MyBusiness_LatLng';
     protected $latlngDataType = '';
-    public $locationName;
     protected $locationStateType = 'Google_Service_MyBusiness_LocationState';
     protected $locationStateDataType = '';
+    public $metadata;
     protected $metadataType = 'Google_Service_MyBusiness_Metadata';
     protected $metadataDataType = '';
     public $name;
     protected $openInfoType = 'Google_Service_MyBusiness_OpenInfo';
     protected $openInfoDataType = '';
+    public $phoneNumbers;
     protected $priceListsType = 'Google_Service_MyBusiness_PriceList';
     protected $priceListsDataType = 'array';
     protected $primaryCategoryType = 'Google_Service_MyBusiness_Category';
     protected $primaryCategoryDataType = '';
-    public $primaryPhone;
     protected $profileType = 'Google_Service_MyBusiness_Profile';
     protected $profileDataType = '';
     protected $regularHoursType = 'Google_Service_MyBusiness_BusinessHours';
@@ -5801,7 +5802,9 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     protected $specialHoursType = 'Google_Service_MyBusiness_SpecialHours';
     protected $specialHoursDataType = '';
     public $storeCode;
-    public $websiteUrl;
+    public $storefrontAddress;
+    public $title;
+    public $websiteUri;
 
 
     public function setAdWordsLocationExtensions(Google_Service_MyBusiness_AdWordsLocationExtensions $adWordsLocationExtensions)
@@ -5814,7 +5817,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function setAdditionalCategories($additionalCategories)
     {
-        $this->additionalCategories = $additionalCategories;
+        $this->categories['additionalCategories'] = $additionalCategories;
     }
     public function getAdditionalCategories()
     {
@@ -5822,7 +5825,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function setAdditionalPhones($additionalPhones)
     {
-        $this->additionalPhones = $additionalPhones;
+        $this->phoneNumbers['additionalPhones'] = $additionalPhones;
     }
     public function getAdditionalPhones()
     {
@@ -5830,7 +5833,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function setAddress(Google_Service_MyBusiness_PostalAddress $address)
     {
-        $this->address = $address;
+        $this->storefrontAddress = $address;
     }
     public function getAddress()
     {
@@ -5862,7 +5865,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function setLocationName($locationName)
     {
-        $this->locationName = $locationName;
+        $this->title = $locationName;
     }
     public function getLocationName()
     {
@@ -5870,7 +5873,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function setLocationState(Google_Service_MyBusiness_LocationState $locationState)
     {
-        $this->locationState = $locationState;
+        $this->metadata = $locationState;
     }
     public function getLocationState()
     {
@@ -5910,7 +5913,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function setPrimaryCategory(Google_Service_MyBusiness_Category $primaryCategory)
     {
-        $this->primaryCategory = $primaryCategory;
+        $this->categories['primaryCategory'] = $primaryCategory;
     }
     public function getPrimaryCategory()
     {
@@ -5918,7 +5921,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function setPrimaryPhone($primaryPhone)
     {
-        $this->primaryPhone = $primaryPhone;
+        $this->phoneNumbers['primaryPhone'] = $primaryPhone;
     }
     public function getPrimaryPhone()
     {
@@ -5972,9 +5975,9 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     {
         return $this->storeCode;
     }
-    public function setWebsiteUrl($websiteUrl)
+    public function setWebsiteUrl($websiteUri)
     {
-        $this->websiteUrl = $websiteUrl;
+        $this->websiteUri = $websiteUri;
     }
     public function getWebsiteUrl()
     {
