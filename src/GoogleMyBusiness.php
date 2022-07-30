@@ -32,6 +32,7 @@
 
 namespace Scottybo\LaravelGoogleMyBusiness;
 
+use Carbon\Carbon;
 use Google_Service;
 use Google_Service_Resource;
 use Google_Model;
@@ -4658,6 +4659,12 @@ class Google_Service_MyBusiness_ServiceList extends Google_Collection
     }
     public function getServiceItems()
     {
+        foreach ($this->serviceItems as $key => $serviceItem){
+            if (isset($serviceItem['freeFormServiceItem'])){
+                $this->serviceItems[$key]['freeFormServiceItem']['categoryId'] = $serviceItem['freeFormServiceItem']['category'];
+                unset($this->serviceItems[$key]['freeFormServiceItem']['category']);
+            }
+        }
         return $this->serviceItems;
     }
 }
@@ -5793,6 +5800,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     protected $primaryCategoryDataType = '';
     protected $profileType = 'Google_Service_MyBusiness_Profile';
     protected $profileDataType = '';
+    public $regularHours;
     protected $regularHoursType = 'Google_Service_MyBusiness_BusinessHours';
     protected $regularHoursDataType = '';
     protected $relationshipDataType = 'Google_Service_MyBusiness_RelationshipData';
@@ -5801,6 +5809,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     protected $serviceAreaDataType = '';
     protected $specialHoursType = 'Google_Service_MyBusiness_SpecialHours';
     protected $specialHoursDataType = '';
+    public $serviceItems;
     public $storeCode;
     public $storefrontAddress;
     public $title;
@@ -5909,7 +5918,13 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getPriceLists()
     {
-        return $this->priceLists;
+        foreach ($this->serviceItems as $key => $serviceItem){
+            if (isset($serviceItem['freeFormServiceItem'])){
+                $this->serviceItems[$key]['freeFormServiceItem']['categoryId'] = $serviceItem['freeFormServiceItem']['category'];
+                unset($this->serviceItems[$key]['freeFormServiceItem']['category']);
+            }
+        }
+        return $this->serviceItems;
     }
     public function setPrimaryCategory(Google_Service_MyBusiness_Category $primaryCategory)
     {
@@ -5941,6 +5956,20 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getRegularHours()
     {
+        foreach ($this->regularHours['periods'] as $key => $period)
+        {
+            $openTime = $period['openTime'];
+            $this->regularHours['periods'][$key]['openTime'] = Carbon::now()->startOfDay()->timezone('asia/tokyo')
+                ->setHour($openTime['hours'] ?? 0)
+                ->setMinute($openTime['minutes'] ?? 0)
+                ->format('H:i');
+
+            $closeTime = $period['closeTime'];
+            $this->regularHours['periods'][$key]['closeTime'] = Carbon::now()->startOfDay()->timezone('asia/tokyo')
+                ->setHour($closeTime['hours'] ?? 0)
+                ->setMinute($closeTime['minutes'] ?? 0)
+                ->format('H:i');
+        }
         return $this->regularHours;
     }
     public function setRelationshipData(Google_Service_MyBusiness_RelationshipData $relationshipData)
