@@ -4659,10 +4659,12 @@ class Google_Service_MyBusiness_ServiceList extends Google_Collection
     }
     public function getServiceItems()
     {
-        foreach ($this->serviceItems as $key => $serviceItem){
-            if (isset($serviceItem['freeFormServiceItem'])){
-                $this->serviceItems[$key]['freeFormServiceItem']['categoryId'] = $serviceItem['freeFormServiceItem']['category'];
-                unset($this->serviceItems[$key]['freeFormServiceItem']['category']);
+        if ($this->serviceItems) {
+            foreach ($this->serviceItems as $key => $serviceItem) {
+                if (isset($serviceItem['freeFormServiceItem'])) {
+                    $this->serviceItems[$key]['freeFormServiceItem']['categoryId'] = $serviceItem['freeFormServiceItem']['category'];
+                    unset($this->serviceItems[$key]['freeFormServiceItem']['category']);
+                }
             }
         }
         return $this->serviceItems;
@@ -5918,10 +5920,12 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getPriceLists()
     {
-        foreach ($this->serviceItems as $key => $serviceItem){
-            if (isset($serviceItem['freeFormServiceItem'])){
-                $this->serviceItems[$key]['freeFormServiceItem']['categoryId'] = $serviceItem['freeFormServiceItem']['category'];
-                unset($this->serviceItems[$key]['freeFormServiceItem']['category']);
+        if ($this->serviceItems){
+            foreach ($this->serviceItems as $key => $serviceItem){
+                if (isset($serviceItem['freeFormServiceItem'])){
+                    $this->serviceItems[$key]['freeFormServiceItem']['categoryId'] = $serviceItem['freeFormServiceItem']['category'];
+                    unset($this->serviceItems[$key]['freeFormServiceItem']['category']);
+                }
             }
         }
         return $this->serviceItems;
@@ -5956,19 +5960,22 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getRegularHours()
     {
-        foreach ($this->regularHours['periods'] as $key => $period)
+        if (isset($this->regularHours['periods']))
         {
-            $openTime = $period['openTime'];
-            $this->regularHours['periods'][$key]['openTime'] = Carbon::now()->startOfDay()->timezone('asia/tokyo')
-                ->setHour($openTime['hours'] ?? 0)
-                ->setMinute($openTime['minutes'] ?? 0)
-                ->format('H:i');
+            foreach ($this->regularHours['periods'] as $key => $period)
+            {
+                $openTime = $period['openTime'];
+                $this->regularHours['periods'][$key]['openTime'] = Carbon::now()->startOfDay()->timezone('asia/tokyo')
+                    ->setHour($openTime['hours'] ?? 0)
+                    ->setMinute($openTime['minutes'] ?? 0)
+                    ->format('H:i');
 
-            $closeTime = $period['closeTime'];
-            $this->regularHours['periods'][$key]['closeTime'] = Carbon::now()->startOfDay()->timezone('asia/tokyo')
-                ->setHour($closeTime['hours'] ?? 0)
-                ->setMinute($closeTime['minutes'] ?? 0)
-                ->format('H:i');
+                $closeTime = $period['closeTime'];
+                $this->regularHours['periods'][$key]['closeTime'] = Carbon::now()->startOfDay()->timezone('asia/tokyo')
+                    ->setHour($closeTime['hours'] ?? 0)
+                    ->setMinute($closeTime['minutes'] ?? 0)
+                    ->format('H:i');
+            }
         }
         return $this->regularHours;
     }
