@@ -5333,7 +5333,7 @@ class Google_Service_MyBusiness_ListLocationsResponse extends Google_Collection
     public function getLocationPrimaryCategoryByLocation($location)
     {
         if (isset($location['categories']['primaryCategory'])){
-            $location['categories']['primaryCategory']['categoryId'] = $this->categories['primaryCategory']['name'];
+            $location['categories']['primaryCategory']['categoryId'] = $location['primaryCategory']['name'];
             return $location['categories']['primaryCategory'];
         } else {
             return $location['categories'];
