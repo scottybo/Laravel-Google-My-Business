@@ -5295,22 +5295,22 @@ class Google_Service_MyBusiness_ListLocationsResponse extends Google_Collection
     {
         return array_filter(array(
             'adWordsLocationExtensions' => $location['adWordsLocationExtensions'] ?? null,
-            'additionalCategories' => array_key_exists('additionalCategories', $location['categories']) ? $location['categories']['additionalCategories'] : null,
+            'additionalCategories' => $this->getLocationAdditionalCategoriesByLocation($location),
             'additionalPhones' => array_key_exists('additionalPhones', $location['phoneNumbers']) ? $location['phoneNumbers']['additionalPhones'] : null,
             'address' => $location['storefrontAddress'] ?? null,
             'labels' => $location['labels'] ?? null,
             'languageCode' => $location['languageCode'] ?? null,
             'latlng' => $location['latlng'] ?? null,
             'locationName' => $location['title'] ?? null,
-            'locationState' => $this->getLocationState($location),
-            'metadata' => $this->getLocationMetadata($location),
+            'locationState' => $this->getLocationStateByLocation($location),
+            'metadata' => $this->getLocationMetadataByLocation($location),
             'name' => $location['name'] ?? null,
             'openInfo' => $location['openInfo'] ?? null,
-            'priceLists' => $this->getLocationPriceLists($location),
-            'primaryCategory' => array_key_exists('primaryCategory', $location['categories']) ? $location['categories']['primaryCategory'] : null,
+            'priceLists' => $this->getLocationPriceListsByLocation($location),
+            'primaryCategory' => $this->getLocationPrimaryCategoryByLocation($location),
             'primaryPhone' => array_key_exists('primaryPhone', $location['phoneNumbers']) ? $location['phoneNumbers']['primaryPhone'] : null,
             'profile' => $location['profile'] ?? null,
-            'regularHours' => $this->getLocationRegularHours($location),
+            'regularHours' => $this->getLocationRegularHoursByLocation($location),
             'relationshipData' => $location['relationshipData'] ?? null,
             'serviceArea' => $location['serviceArea'] ?? null,
             'specialHours' => $location['specialHours'] ?? null,
@@ -5318,7 +5318,28 @@ class Google_Service_MyBusiness_ListLocationsResponse extends Google_Collection
             'websiteUrl' => $location['websiteUri'] ?? null,
         ));
     }
-    private function getLocationState($location)
+    private function getLocationAdditionalCategoriesByLocation($location)
+    {
+        if (isset($location['categories']['additionalCategories'])){
+            foreach ($location['categories']['additionalCategories'] as $key => $additionalCategory)
+            {
+                $location['categories']['additionalCategories'][$key]['categoryId'] = $additionalCategory['name'];
+            }
+            return $location['categories']['additionalCategories'];
+        } else {
+            return $location['categories'];
+        }
+    }
+    public function getLocationPrimaryCategoryByLocation($location)
+    {
+        if (isset($location['categories']['primaryCategory'])){
+            $location['categories']['primaryCategory']['categoryId'] = $this->categories['primaryCategory']['name'];
+            return $location['categories']['primaryCategory'];
+        } else {
+            return $location['categories'];
+        }
+    }
+    private function getLocationStateByLocation($location)
     {
         if (isset($location['metadata'])){
             $location['metadata']['isGoogleUpdated'] = $location['metadata']['hasGoogleUpdated'] ?? false;
@@ -5331,7 +5352,7 @@ class Google_Service_MyBusiness_ListLocationsResponse extends Google_Collection
             return null;
         }
     }
-    private function getLocationMetadata($location)
+    private function getLocationMetadataByLocation($location)
     {
         if (isset($location['metadata'])) {
             $location['metadata']['isGoogleUpdated'] = $location['metadata']['hasGoogleUpdated'] ?? false;
@@ -5348,7 +5369,7 @@ class Google_Service_MyBusiness_ListLocationsResponse extends Google_Collection
             return null;
         }
     }
-    private function getLocationPriceLists($location)
+    private function getLocationPriceListsByLocation($location)
     {
         if(isset($location['serviceItems'])){
             foreach ($location['serviceItems'] as $key => $serviceItem){
@@ -5362,7 +5383,7 @@ class Google_Service_MyBusiness_ListLocationsResponse extends Google_Collection
             return null;
         }
     }
-    private function getLocationRegularHours($location)
+    private function getLocationRegularHoursByLocation($location)
     {
         if(isset($location['regularHours']['periods'])){
             foreach ($location['regularHours']['periods'] as $key => $period)
@@ -5934,7 +5955,15 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getAdditionalCategories()
     {
-        return array_key_exists('additionalCategories', $this->categories) ? $this->categories['additionalCategories'] : null;
+        if (isset($this->categories['additionalCategories'])){
+            foreach ($this->categories['additionalCategories'] as $key => $additionalCategory)
+            {
+                $this->categories['additionalCategories'][$key]['categoryId'] = $additionalCategory['name'];
+            }
+            return $this->categories['additionalCategories'];
+        } else {
+            return $this->categories;
+        }
     }
     public function setAdditionalPhones($additionalPhones)
     {
@@ -6052,7 +6081,12 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getPrimaryCategory()
     {
-        return array_key_exists('primaryCategory', $this->categories) ? $this->categories['primaryCategory'] : null;
+        if (isset($this->categories['primaryCategory'])){
+            $this->categories['primaryCategory']['categoryId'] = $this->categories['primaryCategory']['name'];
+            return $this->categories['primaryCategory'];
+        } else {
+            return $this->categories;
+        }
     }
     public function setPrimaryPhone($primaryPhone)
     {
