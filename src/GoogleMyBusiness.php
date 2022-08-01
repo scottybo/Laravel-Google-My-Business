@@ -2006,8 +2006,8 @@ class Google_Service_MyBusiness_AccountsLocations_Resource extends Google_Servic
      */
     public function listAccountsLocations($parent, $optParams = array())
     {
-        $parent = array('parent' => $parent);
-        $params = array_merge($parent, $optParams);
+        $params = array('parent' => $parent);
+        $params = array_merge($params, $optParams);
         return $this->call('list', array($params), Google_Service_MyBusiness_ListLocationsResponse::class);
     }
 
@@ -4659,15 +4659,14 @@ class Google_Service_MyBusiness_ServiceList extends Google_Collection
     }
     public function getServiceItems()
     {
-        if (($this->serviceItems)){
-            foreach ($this->serviceItems as $key => $serviceItem){
-                if (isset($serviceItem['freeFormServiceItem'])){
+        if ($this->serviceItems) {
+            foreach ($this->serviceItems as $key => $serviceItem) {
+                if (isset($serviceItem['freeFormServiceItem'])) {
                     $this->serviceItems[$key]['freeFormServiceItem']['categoryId'] = $serviceItem['freeFormServiceItem']['category'];
                     unset($this->serviceItems[$key]['freeFormServiceItem']['category']);
                 }
             }
         }
-
         return $this->serviceItems;
     }
 }
@@ -5104,7 +5103,6 @@ class Google_Service_MyBusiness_ListAttributeMetadataResponse extends Google_Col
     protected $attributesType = 'Google_Service_MyBusiness_AttributeMetadata';
     protected $attributesDataType = 'array';
     public $nextPageToken;
-    public $attributeMetadata;
 
 
     public function setAttributes($attributes)
@@ -5272,7 +5270,6 @@ class Google_Service_MyBusiness_ListLocationsResponse extends Google_Collection
     );
     protected $locationsType = 'Google_Service_MyBusiness_Location';
     protected $locationsDataType = 'array';
-    public $locations;
     public $nextPageToken;
     public $totalSize;
 
@@ -5283,106 +5280,7 @@ class Google_Service_MyBusiness_ListLocationsResponse extends Google_Collection
     }
     public function getLocations()
     {
-        if(($this->locations)){
-            foreach ($this->locations as $key => $location)
-            {
-                $this->locations[$key] = $this->getOldObjectLocationFromV1Update($location);
-            }
-        }
         return $this->locations;
-    }
-    private function getOldObjectLocationFromV1Update($location)
-    {
-        return array_filter(array(
-            'adWordsLocationExtensions' => $location['adWordsLocationExtensions'] ?? null,
-            'additionalCategories' => array_key_exists('additionalCategories', $location['categories']) ? $location['categories']['additionalCategories'] : null,
-            'additionalPhones' => array_key_exists('additionalPhones', $location['phoneNumbers']) ? $location['phoneNumbers']['additionalPhones'] : null,
-            'address' => $location['storefrontAddress'] ?? null,
-            'labels' => $location['labels'] ?? null,
-            'languageCode' => $location['languageCode'] ?? null,
-            'latlng' => $location['latlng'] ?? null,
-            'locationName' => $location['title'] ?? null,
-            'locationState' => $this->getLocationState($location),
-            'metadata' => $this->getLocationMetadata($location),
-            'name' => $location['name'] ?? null,
-            'openInfo' => $location['openInfo'] ?? null,
-            'priceLists' => $this->getLocationPriceLists($location),
-            'primaryCategory' => array_key_exists('primaryCategory', $location['categories']) ? $location['categories']['primaryCategory'] : null,
-            'primaryPhone' => array_key_exists('primaryPhone', $location['phoneNumbers']) ? $location['phoneNumbers']['primaryPhone'] : null,
-            'profile' => $location['profile'] ?? null,
-            'regularHours' => $this->getLocationRegularHours($location),
-            'relationshipData' => $location['relationshipData'] ?? null,
-            'serviceArea' => $location['serviceArea'] ?? null,
-            'specialHours' => $location['specialHours'] ?? null,
-            'storeCode' => $location['storeCode'] ?? null,
-            'websiteUrl' => $location['websiteUri'] ?? null,
-        ));
-    }
-    private function getLocationState($location)
-    {
-        if (isset($location['metadata'])){
-            $location['metadata']['isGoogleUpdated'] = $location['metadata']['hasGoogleUpdated'] ?? false;
-            $location['metadata']['isDuplicate'] = isset($location['metadata']['duplicateLocation']);
-
-            if (isset($location['metadata']['hasGoogleUpdated'])) unset($location['metadata']['hasGoogleUpdated']);
-            return $location['metadata'];
-
-        } else {
-            return null;
-        }
-    }
-    private function getLocationMetadata($location)
-    {
-        if (isset($location['metadata'])) {
-            $location['metadata']['isGoogleUpdated'] = $location['metadata']['hasGoogleUpdated'] ?? false;
-            $location['metadata']['isDuplicate'] = isset($location['metadata']['duplicateLocation']);
-            if (isset($location['metadata']['mapsUri'])) {
-                $location['metadata']['mapsUrl'] = $location['metadata']['mapsUri'];
-                unset($location['metadata']['mapsUri']);
-            }
-
-            if (isset($location['metadata']['hasGoogleUpdated'])) unset($location['metadata']['hasGoogleUpdated']);
-
-            return $location['metadata'];
-        } else {
-            return null;
-        }
-    }
-    private function getLocationPriceLists($location)
-    {
-        if(isset($location['serviceItems'])){
-            foreach ($location['serviceItems'] as $key => $serviceItem){
-                if (isset($serviceItem['freeFormServiceItem'])){
-                    $location['serviceItems'][$key]['freeFormServiceItem']['categoryId'] = $serviceItem['freeFormServiceItem']['category'];
-                    unset($location['serviceItems'][$key]['freeFormServiceItem']['category']);
-                }
-            }
-            return $location['serviceItems'];
-        } else {
-            return null;
-        }
-    }
-    private function getLocationRegularHours($location)
-    {
-        if(isset($location['regularHours']['periods'])){
-            foreach ($location['regularHours']['periods'] as $key => $period)
-            {
-                $openTime = $period['openTime'];
-                $location['regularHours']['periods'][$key]['openTime'] = Carbon::now()->startOfDay()->timezone('asia/tokyo')
-                    ->setHour($openTime['hours'] ?? 0)
-                    ->setMinute($openTime['minutes'] ?? 0)
-                    ->format('H:i');
-
-                $closeTime = $period['closeTime'];
-                $location['regularHours']['periods'][$key]['closeTime'] = Carbon::now()->startOfDay()->timezone('asia/tokyo')
-                    ->setHour($closeTime['hours'] ?? 0)
-                    ->setMinute($closeTime['minutes'] ?? 0)
-                    ->format('H:i');
-            }
-            return $location['regularHours'];
-        } else {
-            return null;
-        }
     }
     public function setNextPageToken($nextPageToken)
     {
@@ -5887,7 +5785,6 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     public $categories;
     public $labels;
     public $languageCode;
-    public $locationName;
     protected $latlngType = 'Google_Service_MyBusiness_LatLng';
     protected $latlngDataType = '';
     protected $locationStateType = 'Google_Service_MyBusiness_LocationState';
@@ -5919,6 +5816,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     public $storefrontAddress;
     public $title;
     public $websiteUri;
+
 
     public function setAdWordsLocationExtensions(Google_Service_MyBusiness_AdWordsLocationExtensions $adWordsLocationExtensions)
     {
@@ -5990,10 +5888,6 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getLocationState()
     {
-        $this->metadata['isGoogleUpdated'] = $this->metadata['hasGoogleUpdated'] ?? false;
-        $this->metadata['isDuplicate'] = isset($this->metadata['duplicateLocation']);
-
-        if (isset($this->metadata['hasGoogleUpdated'])) unset($this->metadata['hasGoogleUpdated']);
         return $this->metadata;
     }
     public function setMetadata(Google_Service_MyBusiness_Metadata $metadata)
@@ -6002,16 +5896,6 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getMetadata()
     {
-        $this->metadata['isGoogleUpdated'] = $this->metadata['hasGoogleUpdated'] ?? false;
-        $this->metadata['isDuplicate'] = isset($this->metadata['duplicateLocation']);
-        if(isset($this->metadata['mapsUri']))
-        {
-            $this->metadata['mapsUrl'] = $this->metadata['mapsUri'];
-            unset($this->metadata['mapsUri']);
-        }
-
-        if (isset($this->metadata['hasGoogleUpdated'])) unset($this->metadata['hasGoogleUpdated']);
-
         return $this->metadata;
     }
     public function setName($name)
@@ -6036,7 +5920,7 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getPriceLists()
     {
-        if($this->serviceItems){
+        if ($this->serviceItems){
             foreach ($this->serviceItems as $key => $serviceItem){
                 if (isset($serviceItem['freeFormServiceItem'])){
                     $this->serviceItems[$key]['freeFormServiceItem']['categoryId'] = $serviceItem['freeFormServiceItem']['category'];
@@ -6076,7 +5960,8 @@ class Google_Service_MyBusiness_Location extends Google_Collection
     }
     public function getRegularHours()
     {
-        if(isset($this->regularHours['periods'])){
+        if (isset($this->regularHours['periods']))
+        {
             foreach ($this->regularHours['periods'] as $key => $period)
             {
                 $openTime = $period['openTime'];
